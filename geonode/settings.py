@@ -799,6 +799,12 @@ LEAFLET_CONFIG = {
 # option to enable/disable resource unpublishing for administrators
 RESOURCE_PUBLISHING = False
 
+# Settings for NLP Contrib App
+NLP_ENABLED = True
+NLP_LOCATION_THRESHOLD = 1.0
+NLP_LIBRARY_PATH = "/home/vagrant/MITIE/mitielib"
+NLP_MODEL_PATH = "/home/vagrant/MITIE/MITIE-models/english/ner_model.dat"
+
 CACHES = {
     # DUMMY CACHE FOR DEVELOPMENT
     'default': {

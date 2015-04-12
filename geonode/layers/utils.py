@@ -307,7 +307,7 @@ def unzip_file(upload_file, extension='.shp', tempdir=None):
 
 
 def file_upload(filename, name=None, user=None, title=None, abstract=None,
-                skip=True, overwrite=False, keywords=[], charset='UTF-8'):
+                skip=True, overwrite=False, keywords=[], regions=[], charset='UTF-8'):
     """Saves a layer in GeoNode asking as little information as possible.
        Only filename is required, user and title are optional.
     """
@@ -384,6 +384,23 @@ def file_upload(filename, name=None, user=None, title=None, abstract=None,
             else:
                 defaults[key] = value
 
+    print defaults
+    print keywords
+    if settings.NLP_ENABLED:
+        from geonode.contrib.nlp.utils import nlp_extract_metadata_core
+        nlp_regions, nlp_keywords = nlp_extract_metadata_core(
+            title=defaults['title'],
+            abstract=defaults['abstract'],
+            purpose=defaults['purpose'])
+        #print "nlp_regions"
+        #print nlp_regions
+        #print "nlp_keywords"
+        #print nlp_keywords
+        if regions:
+            regions.extend(nlp_regions)
+        else:
+            regions = nlp_regions
+
     # If it is a vector file, create the layer in postgis.
     if is_vector(filename):
         defaults['storeType'] = 'dataStore'
@@ -413,6 +430,9 @@ def file_upload(filename, name=None, user=None, title=None, abstract=None,
     # Assign the keywords (needs to be done after saving)
     if len(keywords) > 0:
         layer.keywords.add(*keywords)
+
+    if len(regions) > 0:
+        layer.regions.add(*regions)
 
     return layer
 
