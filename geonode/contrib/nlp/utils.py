@@ -45,7 +45,7 @@ sys.path.append(settings.NLP_LIBRARY_PATH)
 from mitie import *
 
 
-def nlp_extract_metadata_core(tile=None, abstract=None, purpose=None):
+def nlp_extract_metadata_core(title=None, abstract=None, purpose=None):
 
     if title or abstract or purpose:
         text= ""
