@@ -39,11 +39,33 @@ from django.http import HttpResponse
 from django.core.cache import cache
 from django.http import Http404
 
+from taggit.models import Tag
+
 from geonode.base.models import Region
+
 
 sys.path.append(settings.NLP_LIBRARY_PATH)
 from mitie import *
 
+def removeDuplicateEntities(entities):
+    seen = set()
+    out = []
+    for e in entities:
+        text, score = e
+        if text not in seen:
+            seen.add(text)
+            out.append(e)
+    return out
+
+def nlp_extract_metadata_dict(d):
+    args = {}
+    if 'title' in d:
+        args['title'] = d['title']
+    if 'abstract' in d:
+        args['abstract'] = d['abstract']
+    if 'purpose' in d:
+        args['purpose'] = d['purpose']
+    return nlp_extract_metadata_core(**args)
 
 def nlp_extract_metadata_core(title=None, abstract=None, purpose=None):
 
@@ -72,17 +94,40 @@ def nlp_extract_metadata_core(title=None, abstract=None, purpose=None):
             elif tag == "ORGANIZATION":
                 organizations.append((entity_text, score))
 
+
+        # Remove Duplicates
+        locations = removeDuplicateEntities(locations)
+        organizations = removeDuplicateEntities(organizations)
+
+        # Resolve Locations to Regions
         regions = []
         for location in locations:
+            print "Checking for location"
             location_text, score = location
+            print location_text
             if score > settings.NLP_LOCATION_THRESHOLD:
-                region = Region.objects.get(name=location_text)
-                if region:
-                    regions.append(region)
+                try:
+                    region = Region.objects.get(name__iexact=location_text)
+                    if region:
+                        regions.append(region)
+                except:
+                    pass
 
+        # Resoluve organizations to Keywords/Tags
         keywords = []
+        for organization in organizations:
+            print "Checking for keywords"
+            organization_text, score = organization
+            print organization_text
+            try:
+                keyword = Tag.objects.get(name__iexact=organization_text)
+                if keyword:
+                    keywords.append(keyword.name)
+            except:
+                pass
+
 
         return (regions, keywords)
 
     else:
-        return None
+        return (None, None)
