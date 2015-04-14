@@ -44,8 +44,8 @@ from taggit.models import Tag
 from geonode.base.models import Region
 
 
-sys.path.append(settings.NLP_LIBRARY_PATH)
-from mitie import *
+#sys.path.append(settings.NLP_LIBRARY_PATH)
+#from mitie import *
 
 def removeDuplicateEntities(entities):
     seen = set()
@@ -57,6 +57,25 @@ def removeDuplicateEntities(entities):
             out.append(e)
     return out
 
+def nlp_extract_metadata_doc(doc):
+
+    if not doc: 
+        return (None, None)
+
+    if not doc.doc_file:
+        return (None, None)
+
+    if os.path.splitext(doc.doc_file.name)[1].lower()[1:] == "txt":
+        text = None
+        with open (doc.doc_file.path, "r") as f:
+            text=f.read()
+        return nlp_extract_metadata_core(text=text)
+    elif os.path.splitext(doc.doc_file.name)[1].lower()[1:] in ["jpg","jpeg"]:
+        return (None, None)
+    else:
+        return (None, None)
+
+
 def nlp_extract_metadata_dict(d):
     args = {}
     if 'title' in d:
@@ -67,10 +86,10 @@ def nlp_extract_metadata_dict(d):
         args['purpose'] = d['purpose']
     return nlp_extract_metadata_core(**args)
 
-def nlp_extract_metadata_core(title=None, abstract=None, purpose=None):
+def nlp_extract_metadata_core(text=None, title=None, abstract=None, purpose=None):
 
     if title or abstract or purpose:
-        text= ""
+        text = ""
         if title:
             text += title + "\n\n"
         if abstract:
@@ -78,6 +97,11 @@ def nlp_extract_metadata_core(title=None, abstract=None, purpose=None):
         if purpose:
             text += purpose + "\n\n"
 
+    if text:
+        #
+        sys.path.append(settings.NLP_LIBRARY_PATH)
+        from mitie import named_entity_extractor, tokenize
+        #
         ner = named_entity_extractor(settings.NLP_MODEL_PATH)
         tokens = tokenize(text)
         entities = ner.extract_entities(tokens)

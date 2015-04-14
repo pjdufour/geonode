@@ -142,8 +142,46 @@ class DocumentUploadView(CreateView):
         if settings.RESOURCE_PUBLISHING:
             is_published = False
         self.object.is_published = is_published
+
         self.object.save()
         self.object.set_permissions(form.cleaned_data['permissions'])
+
+        date = None
+        regions = []
+        keywords = []
+
+        if settings.EXIF_ENABLED:
+            from geonode.contrib.exif.utils import exif_extract_metadata_doc
+            exif_date, exif_regions, exif_keywords = exif_extract_metadata_doc(self.object)
+            if exif_date:
+                date = exif_date
+            if exif_regions:
+                regions.extend(exif_regions)
+            if exif_keywords:
+                keywords.extend(exif_keywords)
+
+        if settings.NLP_ENABLED:
+            from geonode.contrib.nlp.utils import nlp_extract_metadata_doc
+            nlp_regions, nlp_keywords = nlp_extract_metadata_doc(self.object)
+            print "nlp_regions"
+            print nlp_regions
+            print "nlp_keywords"
+            print nlp_keywords
+            if nlp_regions:
+                regions.extend(nlp_regions)
+            if nlp_keywords:
+                keywords.extend(nlp_keywords)
+
+        if date:
+            self.object.date = date
+            self.object.date_type = "Creation"
+            self.object.save()
+
+        if len(regions) > 0:
+            self.object.regions.add(*regions)
+        if len(keywords) > 0:
+            self.object.keywords.add(*keywords)
+
         return HttpResponseRedirect(
             reverse(
                 'document_metadata',
