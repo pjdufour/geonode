@@ -149,16 +149,19 @@ class DocumentUploadView(CreateView):
         date = None
         regions = []
         keywords = []
+        bbox = None
 
         if settings.EXIF_ENABLED:
             from geonode.contrib.exif.utils import exif_extract_metadata_doc
-            exif_date, exif_regions, exif_keywords = exif_extract_metadata_doc(self.object)
+            exif_date, exif_regions, exif_keywords, exif_bbox = exif_extract_metadata_doc(self.object)
             if exif_date:
                 date = exif_date
             if exif_regions:
                 regions.extend(exif_regions)
             if exif_keywords:
                 keywords.extend(exif_keywords)
+            if exif_bbox:
+                bbox = exif_bbox
 
         if settings.NLP_ENABLED:
             from geonode.contrib.nlp.utils import nlp_extract_metadata_doc
@@ -171,6 +174,18 @@ class DocumentUploadView(CreateView):
                 regions.extend(nlp_regions)
             if nlp_keywords:
                 keywords.extend(nlp_keywords)
+
+        if bbox:
+            print "bbox --+"
+            print bbox
+            bbox_x0, bbox_x1, bbox_y0, bbox_y1 = bbox
+            self.object.bbox_x0 = bbox_x0
+            self.object.bbox_x1 = bbox_x1
+            self.object.bbox_y0 = bbox_y0
+            self.object.bbox_y1 = bbox_y1
+            print "saving bbox"
+            print self.object
+            self.object.save()
 
         if date:
             self.object.date = date

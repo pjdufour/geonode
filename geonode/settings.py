@@ -800,7 +800,7 @@ LEAFLET_CONFIG = {
 RESOURCE_PUBLISHING = False
 
 # Settings for EXIF Contrib App
-EXIF_ENABLED = True
+EXIF_ENABLED = False
 
 # Settings for NLP Contrib App
 NLP_ENABLED = False

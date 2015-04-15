@@ -67,6 +67,17 @@ def convertExifDateToDjangoDate(date):
        int("".join(a[14:16]))
    )
 
+def convertExifLocationToDecimalDegrees(location):
+    if location:
+        dd = 0.0
+        d, m, s = location
+        dd += float(d[0]) / float(d[1])
+        dd += (float(d[0]) / float(d[1])) / 60.0
+        dd += (float(d[0]) / float(d[1])) / 3600.0
+        return dd
+    else:
+        return None
+
 def exif_extract_metadata_doc(doc):
 
     if not doc: 
@@ -89,6 +100,7 @@ def exif_extract_metadata_doc(doc):
         date = None
         regions = []
         keywords = []
+        bbox = None
 
         # Extract Date from Exif Data
         if "DateTime" in exif_data:
@@ -112,7 +124,10 @@ def exif_extract_metadata_doc(doc):
                 decode = ExifTags.GPSTAGS.get(key,key)
                 gpsinfo[decode] = exif_data["GPSInfo"][key]
             print gpsinfo
+            lat = convertExifLocationToDecimalDegrees(gpsinfo["GPSLatitude"])
+            lon = convertExifLocationToDecimalDegrees(gpsinfo["GPSLongitude"])
+            bbox = (lon, lon, lat, lat)
 
-        return (date, None, keywords)
+        return (date, None, keywords, bbox)
     else:
-        return (None, None)
+        return (None, None, keywords, bbox)
