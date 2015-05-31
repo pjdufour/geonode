@@ -138,6 +138,12 @@
     <dd>{{ resource.spatial_representation_type }}</dd>
     {% endif %}
 
+    {% if resource.bbox_string %}
+    <dt>{% trans "Bounding Box (W, S, E, N)" %}</dt>
+    <dd>{{ resource.bbox_string }}</dd>
+    {% endif %}
+
+
   </div>
 
   </dl>

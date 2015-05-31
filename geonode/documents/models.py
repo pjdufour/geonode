@@ -160,6 +160,8 @@ def pre_save_document(instance, sender, **kwargs):
         instance.bbox_y0 = instance.resource.bbox_y0
         instance.bbox_y1 = instance.resource.bbox_y1
     else:
+        # For Images this is always executed so it overrides exif bounding box.
+        # Need to find a way to elseif or pass bbox
         instance.bbox_x0 = -180
         instance.bbox_x1 = 180
         instance.bbox_y0 = -90

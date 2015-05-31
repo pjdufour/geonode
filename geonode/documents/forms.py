@@ -125,6 +125,7 @@ class DocumentCreateForm(TranslationModelForm):
     resource = forms.CharField(
         required=False,
         label=_("Link to"),
+        help_text=_("Link to other layer or map. For example, if a PDF map, link to GeoNode map of layers used."),
         widget=TextInput(
             attrs={
                 'name': 'title__contains',

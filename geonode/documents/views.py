@@ -175,18 +175,6 @@ class DocumentUploadView(CreateView):
             if nlp_keywords:
                 keywords.extend(nlp_keywords)
 
-        if bbox:
-            print "bbox --+"
-            print bbox
-            bbox_x0, bbox_x1, bbox_y0, bbox_y1 = bbox
-            self.object.bbox_x0 = bbox_x0
-            self.object.bbox_x1 = bbox_x1
-            self.object.bbox_y0 = bbox_y0
-            self.object.bbox_y1 = bbox_y1
-            print "saving bbox"
-            print self.object
-            self.object.save()
-
         if date:
             self.object.date = date
             self.object.date_type = "Creation"
@@ -196,6 +184,22 @@ class DocumentUploadView(CreateView):
             self.object.regions.add(*regions)
         if len(keywords) > 0:
             self.object.keywords.add(*keywords)
+
+        if bbox:
+            print "bbox --+"
+            print bbox
+            "self.object.resource"
+            print self.object.resource
+            bbox_x0, bbox_x1, bbox_y0, bbox_y1 = bbox
+            #ResourceBase.objects.filter(id=self.object.pk).update(
+            Document.objects.filter(id=self.object.pk).update(
+                bbox_x0 = bbox_x0,
+                bbox_x1 = bbox_x1,
+                bbox_y0 = bbox_y0,
+                bbox_y1 = bbox_y1)
+            print "saving bbox"
+            #self.object.save()
+
 
         return HttpResponseRedirect(
             reverse(
