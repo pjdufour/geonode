@@ -525,4 +525,18 @@ Default::
         'JPEG', 'PDF', 'PNG' 'Tiles',
     ]
 
+Contrib settings
+=================
+
+EXIF_ENABED
+...........
+Default: ``False``
+
+A boolean that specifies whether the Exif contrib app is enabled.  If enabled, users are given the option to extract Exif data from documents when they are uploaded.  This flag will cover other future Exif-related features, too.
+
+NLP_ENABED
+.............
+Default: ``False``
+
+A boolean that specifies whether to enabled the NLP (Natural Language Processing) contrib app.  If enabled, users are given the option to use NLP to extract additional metadata from uploaded layers and documents.
 

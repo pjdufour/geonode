@@ -28,7 +28,16 @@
             </div>
             <div id="<%= name %>:geogig_store" name='<%= name %>:geogig_store' style="width: 225px; visibility:hidden;padding:5px"></div>
         <% } %>
-
+        <% if (exif) { %>
+            <div class="checkbox">
+                <input type='checkbox' id='<%= name %>-exif' name='<%= name %>-exif'/><label for="<%= name %>-exif">&nbsp;Extract Exif tags</label>
+            </div>
+        <% } %>
+        <% if (nlp) { %>
+            <div class="checkbox">
+                <input type='checkbox' id='<%= name %>-nlp' name='<%= name %>-nlp'/><label for="<%= name %>-nlp">&nbsp;Use NLP to extract metadata</label>
+            </div>
+        <% } %>
     </div>
     <% } %>
     <hr />

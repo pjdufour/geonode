@@ -113,6 +113,8 @@
   form_target = "{% url "layer_replace" layer.service_typename %}",
   geogig_enabled = {{ GEOGIG_ENABLED|lower  }},
   time_enabled = {{ TIME_ENABLED|lower  }},
+  exif_enabled = {{ EXIF_ENABLED|lower  }},
+  nlp_enabled = {{ NLP_ENABLED|lower  }},
   userLookup = "{% url "geonode.views.ajax_lookup" %}"
 
 {% endautoescape %}

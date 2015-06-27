@@ -44,6 +44,8 @@ class LayerUploadForm(forms.Form):
     geogig = forms.BooleanField(required=False)
     geogig_store = forms.CharField(required=False)
     time = forms.BooleanField(required=False)
+    exif = forms.BooleanField(required=False)
+    nlp = forms.BooleanField(required=False)
 
     abstract = forms.CharField(required=False)
     layer_title = forms.CharField(required=False)
