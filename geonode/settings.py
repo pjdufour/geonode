@@ -803,7 +803,7 @@ RESOURCE_PUBLISHING = False
 EXIF_ENABLED = True
 
 # Settings for NLP Contrib App
-NLP_ENABLED = False
+NLP_ENABLED = True
 NLP_LOCATION_THRESHOLD = 1.0
 NLP_LIBRARY_PATH = "/home/vagrant/MITIE/mitielib"
 NLP_MODEL_PATH = "/home/vagrant/MITIE/MITIE-models/english/ner_model.dat"

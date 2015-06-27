@@ -130,6 +130,10 @@ class DocumentCreateForm(TranslationModelForm):
             attrs={
                 'name': 'title__contains',
                 'id': 'resource'}))
+    if settings.EXIF_ENABLED:
+        exif = forms.BooleanField(label=_('Exif'), required=False, help_text=_('Extract Exif tags'))
+    if settings.NLP_ENABLED:
+        nlp = forms.BooleanField(label=_('NLP'), required=False, help_text=_('Use NLP (Natural Language Processing) to extract metadata'))
 
     class Meta:
         model = Document

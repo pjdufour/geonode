@@ -134,7 +134,7 @@ define(function (require, exports) {
      *  @returns {FromData}
      */
     LayerInfo.prototype.prepareFormData = function (form_data) {
-        var i, ext, file, perm, geogig, geogig_store, time;
+        var i, ext, file, perm, geogig, geogig_store, time, nlp;
 
         if (!form_data) {
             form_data = new FormData();
@@ -160,7 +160,12 @@ define(function (require, exports) {
         if (time_enabled) {
             time = $('#' + this.main.name.slice(0, -4) + '-time').is(':checked');
             form_data.append('time', time);
-        } 
+        }
+        if (nlp_enabled) {
+            nlp = $('#' + this.main.name.slice(0, -4) + '-nlp').is(':checked');
+            form_data.append('nlp', nlp);
+        }
+ 
 
         form_data.append('base_file', this.main);
         form_data.append('permissions', JSON.stringify(perm));
@@ -457,7 +462,8 @@ define(function (require, exports) {
                 type: this.type.name,
                 format: this.type.format,
                 geogig: geogig_enabled,
-                time: time_enabled
+                time: time_enabled,
+                nlp: nlp_enabled
             });
         file_queue.append(li);
         this.errors = this.collectErrors();

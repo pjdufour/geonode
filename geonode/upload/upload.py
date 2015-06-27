@@ -112,6 +112,9 @@ class UploaderSession(object):
     # Configure Time for this Layer
     time = None
 
+    # Use NLP to extract metadata
+    nlp = None
+
     # the title given to the layer
     layer_title = None
 
