@@ -666,6 +666,8 @@ TWITTER_HASHTAGS = ['geonode']
 
 OPENGRAPH_ENABLED = True
 
+QUICKVIEW_VIEWPERMS_ENABLED = True
+
 # Enable Licenses User Interface
 # Regardless of selection, license field stil exists as a field in the Resourcebase model.
 # Detail Display: above, below, never

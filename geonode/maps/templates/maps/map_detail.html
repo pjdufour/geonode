@@ -25,7 +25,9 @@
   {% overall_rating resource "map" as map_rating %}
 
 <div class="page-header">
-  <h2 class="page-title">{{ resource.title }}</h2>
+  <h2 class="page-title">{{ resource.title }}
+    {% include "_quickview_viewperms.html" %}
+  </h2>
 </div>
 
   <div class="row">

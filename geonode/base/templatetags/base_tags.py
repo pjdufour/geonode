@@ -16,6 +16,12 @@ from geonode.groups.models import GroupProfile
 register = template.Library()
 
 
+@register.filter
+def classname(obj):
+    classname = obj.__class__.__name__
+    return classname
+
+
 @register.assignment_tag
 def num_ratings(obj):
     ct = ContentType.objects.get_for_model(obj)

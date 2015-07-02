@@ -32,7 +32,9 @@
 
 {% block body_outer %}
 <div class="page-header">
-  <h2 class="page-title">{{ resource.title|default:resource.typename }}</h2>
+  <h2 class="page-title">{{ resource.title|default:resource.typename }}
+    {% include "_quickview_viewperms.html" %}
+  </h2>
 </div>
 
 <div class="row">
@@ -138,8 +140,7 @@
 
     <ul class="list-group">
       {% if resource.storeType != "remoteStore" %}
-        {% get_obj_perms request.user for resource.get_self_resource as "perms" %}
-        
+        {{ perms|classname }}
         <li class="list-group-item">
         {% if links %}
            <button class="btn btn-primary btn-md btn-block" data-toggle="modal" data-target="#download-layer">{% trans "Download Layer" %}</button>
@@ -172,7 +173,6 @@
         </div>
       </div>
     </div>
-
     {% if GEOSERVER_BASE_URL %}
       {% get_obj_perms request.user for resource.layer as "layer_perms" %}
     {% endif %}
@@ -328,7 +328,6 @@
       </ul>
     </li>
     {% endif %}
-
     {% if GEONODE_SECURITY_ENABLED %}
     {% if "change_resourcebase_permissions" in perms %}
     <li class="list-group-item">

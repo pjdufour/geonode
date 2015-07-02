@@ -26,13 +26,13 @@
 {% block body_outer %}
 
 <div class="page-header">
-  <h2>{{ resource.title }}</h2>
+  <h2 class="page-title">{{ resource.title }}
+    {% include "_quickview_viewperms.html" %}
+  </h2>
 </div>
 
 <div class="row">
   <div class="col-md-8">
-
-    {% get_obj_perms request.user for resource.get_self_resource as "perms" %}
     {% if "download_resourcebase" in perms %}
       {% if resource.extension|lower in imgtypes and resource.doc_file %}
       <div id="embedded_map">
@@ -81,7 +81,6 @@
   <div class="col-md-4">
 
     <ul class="list-group">
-      {% get_obj_perms request.user for resource.get_self_resource as "perms" %}
       <li class="list-group-item">
       {% if "download_resourcebase" in perms %}
         {% if resource.extension|lower in imgtypes and resource.doc_file %}

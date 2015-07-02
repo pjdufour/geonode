@@ -1,0 +1,22 @@
+{% load i18n %}
+
+{% if request.user.is_authenticated and QUICKVIEW_VIEWPERMS_ENABLED and perms and perms_anonymoususer %}
+  {{ perms }}
+  {% if "change_resourcebase_permissions" in perms %}
+    <a title="{% trans "Who can view it?" %}" href="#modal_perms" data-toggle="modal" data-target="#_permissions" class="btn btn-warning btn-md" id="quickview_viewperms" style="float: right;">
+    {% if 'view_resourcebase' in perms_anonymoususer %}
+      <i class="fa fa-unlock" style=""></i><span> {% trans "Anyone" %}</span>
+    {% else %}
+      <i class="fa fa-lock" style=""></i><span> {% trans "Restricted" %}</span>
+    {% endif %}
+    </a>
+  {% else %}
+    <a title="{% trans "Who can view it?" %}" class="btn btn-warning btn-md" id="quickview_viewperms" style="float: right;">
+    {% if 'view_resourcebase' in perms_anonymoususer %}
+      <i class="fa fa-unlock" style=""></i><span> {% trans "Anyone" %}</span>
+    {% else %}
+      <i class="fa fa-lock" style=""></i><span> {% trans "Restricted" %}</span>
+    {% endif %}
+    </a>
+  {% endif %}
+{% endif %}

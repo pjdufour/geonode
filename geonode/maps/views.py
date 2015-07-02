@@ -44,7 +44,7 @@ from geonode.utils import default_map_config
 from geonode.utils import resolve_object
 from geonode.utils import layer_from_viewer_config
 from geonode.maps.forms import MapForm
-from geonode.security.views import _perms_info_json
+from geonode.security.views import _perms_info_flat
 from geonode.base.forms import CategoryForm
 from geonode.base.models import TopicCategory
 from geonode.tasks.deletion import delete_map
@@ -115,11 +115,14 @@ def map_detail(request, mapid, snapshot=None, template='maps/map_detail.html'):
     config = json.dumps(config)
     layers = MapLayer.objects.filter(map=map_obj.id)
 
+    perms = _perms_info_flat(map_obj)
+
     context_dict = {
         'config': config,
         'resource': map_obj,
         'layers': layers,
-        'permissions_json': _perms_info_json(map_obj),
+        'permissions_json': json.dumps(perms),
+        "perms_anonymoususer": perms.get('users', {}).get(u'AnonymousUser', None),
         "documents": get_related_documents(map_obj),
     }
 

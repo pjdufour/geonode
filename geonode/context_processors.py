@@ -103,6 +103,11 @@ def resource_urls(request):
             dict()).get(
             'METADATA',
             'never'),
+        QUICKVIEW_VIEWPERMS_ENABLED=getattr(
+            settings,
+            'QUICKVIEW_VIEWPERMS_ENABLED',
+            False
+        ),
         USE_NOTIFICATIONS=('notification' in settings.INSTALLED_APPS),
         DEFAULT_ANONYMOUS_VIEW_PERMISSION=getattr(settings, 'DEFAULT_ANONYMOUS_VIEW_PERMISSION', False),
         DEFAULT_ANONYMOUS_DOWNLOAD_PERMISSION=getattr(settings, 'DEFAULT_ANONYMOUS_DOWNLOAD_PERMISSION', False),

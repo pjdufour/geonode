@@ -297,10 +297,28 @@
       var permissions = permissionsString(form, 'base');
       $.ajax(
         {
+          context: this,
           type: "POST",
           url: action,
           data: JSON.stringify(permissions),
           success: function(data) {
+            try{
+              var data_json = $.parseJSON(data)
+              if(data_json['success']==true)
+              {
+                var perms = permissionsString($(this),'base')
+                if($.inArray('view_resourcebase', perms['users']['AnonymousUser'])!=-1)
+                {
+                  $("#quickview_viewperms i").addClass('fa-unlock').removeClass('fa-lock');
+                  $("#quickview_viewperms span").html(' {% trans "Anyone" %}')
+                }
+                else
+                {
+                  $("#quickview_viewperms i").addClass('fa-lock').removeClass('fa-unlock');
+                  $("#quickview_viewperms span").html(' {% trans "Restricted" %}')
+                }
+              }
+            } catch(err) { console.log("Could not update quickview_viewperms.") }
             $("#modal_perms").modal("hide");
           }
         }

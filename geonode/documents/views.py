@@ -12,8 +12,10 @@ from django_downloadview.response import DownloadResponse
 from django.views.generic.edit import UpdateView, CreateView
 from django.db.models import F
 
+from guardian.shortcuts import get_perms
+
 from geonode.utils import resolve_object
-from geonode.security.views import _perms_info_json
+from geonode.security.views import _perms_info_flat
 from geonode.people.forms import ProfileForm
 from geonode.base.forms import CategoryForm
 from geonode.base.models import TopicCategory, ResourceBase
@@ -89,8 +91,12 @@ def document_detail(request, docid):
         metadata = document.link_set.metadata().filter(
             name__in=settings.DOWNLOAD_FORMATS_METADATA)
 
+        perms_flat = _perms_info_flat(document)
+
         context_dict = {
-            'permissions_json': _perms_info_json(document),
+            'perms': get_perms(request.user, document.get_self_resource()),
+            'permissions_json': json.dumps(perms_flat),
+            "perms_anonymoususer": perms_flat.get('users', {}).get(u'AnonymousUser', None),
             'resource': document,
             'metadata': metadata,
             'imgtypes': IMGTYPES,
