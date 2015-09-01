@@ -297,10 +297,28 @@
       var permissions = permissionsString(form, 'base');
       $.ajax(
         {
+          context: this,
           type: "POST",
           url: action,
           data: JSON.stringify(permissions),
           success: function(data) {
+            try{
+              var data_json = $.parseJSON(data)
+              if(data_json['success']==true)
+              {
+                var perms = permissionsString($(this),'base')
+                if($.inArray('view_resourcebase', perms['users']['AnonymousUser'])!=-1)
+                {
+                  $("#anonviewperms i").addClass('fa-unlock').removeClass('fa-lock');
+                  $("#anonviewperms span").html(' {% trans "Anyone" %}')
+                }
+                else
+                {
+                  $("#anonviewperms i").addClass('fa-lock').removeClass('fa-unlock');
+                  $("#anonviewperms span").html(' {% trans "Restricted" %}')
+                }
+              }
+            } catch(err) { console.log("Could not update anonviewperms.") }
             $("#modal_perms").modal("hide");
           }
         }

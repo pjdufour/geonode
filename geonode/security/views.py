@@ -38,14 +38,17 @@ def _perms_info(obj):
     return info
 
 
-def _perms_info_json(obj):
+def _perms_info_flat(obj):
     info = _perms_info(obj)
     info['users'] = dict([(u.username, perms)
                           for u, perms in info['users'].items()])
     info['groups'] = dict([(g.name, perms)
                            for g, perms in info['groups'].items()])
+    return info
 
-    return json.dumps(info)
+
+def _perms_info_json(obj):
+    return json.dumps(_perms_info_flat(obj))
 
 
 def resource_permissions(request, resource_id):

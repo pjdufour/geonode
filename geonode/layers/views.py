@@ -53,7 +53,7 @@ from geonode.utils import GXPMap
 from geonode.layers.utils import file_upload, is_raster, is_vector
 from geonode.utils import resolve_object, llbbox_to_mercator
 from geonode.people.forms import ProfileForm, PocForm
-from geonode.security.views import _perms_info_json
+from geonode.security.views import _perms_info_flat
 from geonode.documents.models import get_related_documents
 from geonode.utils import build_social_links
 from geonode.geoserver.helpers import cascading_delete, gs_catalog
@@ -269,10 +269,13 @@ def layer_detail(request, layername, template='layers/layer_detail.html'):
     metadata = layer.link_set.metadata().filter(
         name__in=settings.DOWNLOAD_FORMATS_METADATA)
 
+    perms_flat = _perms_info_flat(layer)
+
     context_dict = {
         "resource": layer,
         'perms_list': get_perms(request.user, layer.get_self_resource()),
-        "permissions_json": _perms_info_json(layer),
+        "permissions_json": json.dumps(perms_flat),
+        "perms_anonymoususer": perms_flat.get('users', {}).get(u'AnonymousUser', None),
         "documents": get_related_documents(layer),
         "metadata": metadata,
         "is_layer": True,
