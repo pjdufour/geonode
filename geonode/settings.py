@@ -247,7 +247,8 @@ GEONODE_CONTRIB_APPS = (
     'geonode.contrib.geogig',
     'geonode.contrib.geosites',
     'geonode.contrib.nlp',
-    'geonode.contrib.slack'
+    'geonode.contrib.slack',
+    'geonode.contrib.tilejet'
 )
 
 # Uncomment the following line to enable contrib apps
@@ -820,6 +821,39 @@ SLACK_ENABLED = False
 SLACK_WEBHOOK_URLS = [
     "https://hooks.slack.com/services/T000/B000/XX"
 ]
+
+# Settings for TileJet contrib app
+TILJET_ENABLED = False
+
+TILEJET_GEVENT_MONKEY_PATCH_ENABLED = True
+
+TILEJET_OPTIONS = {
+    'name': 'Tile Jet',
+    'cache': {
+        'memory': {
+            'enabled': True,
+            'type':'memory',
+            'description': 'Main in-memory cache for tiles.',
+            'target':'tiles',
+            'minZoom': 0,
+            'maxZoom': 18,
+            'expiration': 'origin'
+        }
+    }
+}
+
+LOG_REQUEST_ROOT = PROJECT_ROOT+'/logs/requests'
+LOG_INDIRECT_ROOT = PROJECT_ROOT+'/logs/indirect'
+LOG_ERRORS_ROOT = PROJECT_ROOT+'/logs/errors'
+LOG_REQUEST_FORMAT = '{status}  {tileorigin}    {tilesource}    {z}     {x}     {y}     {ip}    {datetime}'
+LOG_REQUEST_COLLECTION = 'logs'
+MONGO_AGG_FLAG = False
+ASYNC_STATS = True
+ASYNC_WRITEBACK = False
+
+TILEJET_STATS_REQUEST_FILE = "stats.json"
+TILEJET_STATS_SAVE_FILE = True
+TILEJET_STATS_SAVE_MEMORY = False
 
 CACHES = {
     # DUMMY CACHE FOR DEVELOPMENT

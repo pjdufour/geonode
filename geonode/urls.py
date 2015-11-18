@@ -104,6 +104,11 @@ if "geonode.contrib.dynamic" in settings.INSTALLED_APPS:
                             (r'^dynamic/', include('geonode.contrib.dynamic.urls')),
                             )
 
+if "geonode.contrib.tilejet" in settings.INSTALLED_APPS:
+    urlpatterns += patterns('',
+                            (r'^tilejet/', include('geonode.contrib.tilejet.urls')),
+                            )
+
 if 'geonode.geoserver' in settings.INSTALLED_APPS:
     # GeoServer Helper Views
     urlpatterns += patterns('',

@@ -614,3 +614,8 @@ Default::
         "https://hooks.slack.com/services/T000/B000/XX"
     ]
 
+TILEJET_ENABLED
+---------------
+Default: ``False``
+
+A boolean that specifies whether the TileJet contrib app is enabled.  If enabled, basemap tiles are cached in-memory.  Use this app for GeoNode deployments on networks with a slow or unreliable internet connection.  Only use if sufficient memory or swap space is available.  Do not use for mid-level cloud deployments as the latency benefit will not be worth the memory cost.
