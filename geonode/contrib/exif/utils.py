@@ -74,8 +74,7 @@ def exif_extract_dict(doc):
         from PIL import Image, ExifTags
         img = Image.open(doc.doc_file.path)
         exif_data = {
-            ExifTags.TAGS[k]: v
-            for k, v in img._getexif().items() if k in ExifTags.TAGS
+            ExifTags.TAGS[k]: v for k, v in img._getexif().items() if k in ExifTags.TAGS # noqa
         }
 
         exif_dict = {
