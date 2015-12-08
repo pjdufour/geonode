@@ -250,6 +250,7 @@ GEONODE_CONTRIB_APPS = (
     'geonode.contrib.slack'
 )
 
+GEONODE_APPS = GEONODE_APPS + ('geonode.contrib.geowatch',)
 # Uncomment the following line to enable contrib apps
 # GEONODE_APPS = GEONODE_APPS + GEONODE_CONTRIB_APPS
 
@@ -808,11 +809,8 @@ NLP_LOCATION_THRESHOLD = 1.0
 NLP_LIBRARY_PATH = "/opt/MITIE/mitielib"
 NLP_MODEL_PATH = "/opt/MITIE/MITIE-models/english/ner_model.dat"
 
-# Settings for Slack contrib app
-SLACK_ENABLED = False
-SLACK_WEBHOOK_URLS = [
-    "https://hooks.slack.com/services/T000/B000/XX"
-]
+# Settings for GeoWatch contrib app
+GEOWATCH_ENABLED = False
 
 CACHES = {
     # DUMMY CACHE FOR DEVELOPMENT

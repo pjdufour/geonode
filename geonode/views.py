@@ -58,6 +58,14 @@ def ajax_login(request):
             login(request, user)
             if request.session.test_cookie_worked():
                 request.session.delete_test_cookie()
+
+            if getattr(settings, 'GEOWATCH_ENABLED', False):
+                try:
+                    from geonode.contrib.geowatch.utils import geowatch_run
+                    geowatch_run('login', user)
+                except:
+                    print "Could not run GeoWatch for user login."
+
             return HttpResponse(
                 content="successful login",
                 status=200,

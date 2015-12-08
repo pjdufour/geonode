@@ -209,12 +209,12 @@ class DocumentUploadView(CreateView):
                 bbox_y0=bbox_y0,
                 bbox_y1=bbox_y1)
 
-        if getattr(settings, 'SLACK_ENABLED', False):
+        if getattr(settings, 'GEOWATCH_ENABLED', False):
             try:
-                from geonode.contrib.slack.utils import build_slack_message_document, send_slack_message
-                send_slack_message(build_slack_message_document("document_new", self.object))
+                from geonode.contrib.geowatch.utils import geowatch_run
+                geowatch_run('new', self.object)
             except:
-                print "Could not send slack message for new document."
+                print "Could not run GeoWatch for new document."
 
         return HttpResponseRedirect(
             reverse(
@@ -352,12 +352,12 @@ def document_metadata(
                 the_document.keywords.add(*new_keywords)
                 Document.objects.filter(id=the_document.id).update(category=new_category)
 
-                if getattr(settings, 'SLACK_ENABLED', False):
+                if getattr(settings, 'GEOWATCH_ENABLED', False):
                     try:
-                        from geonode.contrib.slack.utils import build_slack_message_document, send_slack_messages
-                        send_slack_messages(build_slack_message_document("document_edit", the_document))
+                        from geonode.contrib.geowatch.utils import geowatch_run
+                        geowatch_run('edit', the_document)
                     except:
-                        print "Could not send slack message for modified document."
+                        print "Could not run GeoWatch for modified document"
 
                 return HttpResponseRedirect(
                     reverse(
@@ -421,21 +421,25 @@ def document_remove(request, docid, template='documents/document_remove.html'):
 
         if request.method == 'POST':
 
-            if getattr(settings, 'SLACK_ENABLED', False):
-                slack_message = None
+            if getattr(settings, 'GEOWATCH_ENABLED', False):
+
+                message = None
                 try:
-                    from geonode.contrib.slack.utils import build_slack_message_document
-                    slack_message = build_slack_message_document("document_delete", document)
+                    from geonode.contrib.geowatch.utils import build_geowatch_message_resource
+                    message = build_geowatch_message_resource('delete', document)
                 except:
-                    print "Could not build slack message for delete document."
+                    message = None
+                    print "Could not run GeoWatch for delete document."
 
                 document.delete()
 
-                try:
-                    from geonode.contrib.slack.utils import send_slack_messages
-                    send_slack_messages(slack_message)
-                except:
-                    print "Could not send slack message for delete document."
+                if message:
+                    try:
+                        from geonode.contrib.geowatch.utils import geowatch_run_postdelete
+                        geowatch_run_postdelete(message, 'document')
+                    except:
+                        print "Could not run GeoWatch for delete document."
+
             else:
                 document.delete()
 

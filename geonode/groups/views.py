@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponseForbidden, HttpResponseRedirect, HttpResponseNotAllowed
@@ -22,6 +23,15 @@ def group_create(request):
             group.save()
             form.save_m2m()
             group.join(request.user, role="manager")
+
+            if getattr(settings, 'GEOWATCH_ENABLED', False):
+                if 1==1:
+                #try:
+                    from geonode.contrib.geowatch.utils import run_watchlist
+                    run_watchlist('new', group)
+                #except:
+                #    print "Could not run GeoWatch watchlist for new group."
+
             return HttpResponseRedirect(
                 reverse(
                     "group_detail",
@@ -47,6 +57,14 @@ def group_update(request, slug):
             group = form.save(commit=False)
             group.save()
             form.save_m2m()
+
+            if getattr(settings, 'GEOWATCH_ENABLED', False):
+                try:
+                    from geonode.contrib.geowatch.utils import geowatch_run
+                    geowatch_run('edit', group)
+                except:
+                    print "Could not run GeoWatch for modified group."
+
             return HttpResponseRedirect(
                 reverse(
                     "group_detail",
@@ -216,7 +234,26 @@ def group_remove(request, slug):
         if not group.user_is_role(request.user, role="manager"):
             return HttpResponseForbidden()
 
-        group.delete()
+        if getattr(settings, 'GEOWATCH_ENABLED', False):
+            message = None
+            try:
+                from geonode.contrib.geowatch.utils import build_geowatch_message_group
+                message = build_geowatch_message_group('delete', group)
+            except:
+                message = None
+                print "Could not run GeoWatch for delete group."
+
+            group.delete()
+
+            if message:
+                try:
+                    from geonode.contrib.geowatch.utils import geowatch_run_postdelete
+                    geowatch_run_postdelete(message, 'group')
+                except:
+                    print "Could not run GeoWatch for delete group."
+        else:
+            group.delete()
+
         return HttpResponseRedirect(reverse("group_list"))
     else:
         return HttpResponseNotAllowed()

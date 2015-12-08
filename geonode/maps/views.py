@@ -197,12 +197,12 @@ def map_metadata(request, mapid, template='maps/map_metadata.html'):
             the_map.category = new_category
             the_map.save()
 
-            if getattr(settings, 'SLACK_ENABLED', False):
+            if getattr(settings, 'GEOWATCH_ENABLED', False):
                 try:
-                    from geonode.contrib.slack.utils import build_slack_message_map, send_slack_messages
-                    send_slack_messages(build_slack_message_map("map_edit", the_map))
+                    from geonode.contrib.geowatch.utils import geowatch_run
+                    geowatch_run('edit', the_map)
                 except:
-                    print "Could not send slack message for modified map."
+                    print "Could not run GeoWatch for modified map."
 
             return HttpResponseRedirect(
                 reverse(
@@ -254,22 +254,24 @@ def map_remove(request, mapid, template='maps/map_remove.html'):
 
     elif request.method == 'POST':
 
-        if getattr(settings, 'SLACK_ENABLED', False):
+        if getattr(settings, 'GEOWATCH_ENABLED', False):
 
-            slack_message = None
+            message = None
             try:
-                from geonode.contrib.slack.utils import build_slack_message_map
-                slack_message = build_slack_message_map("map_delete", map_obj)
+                from geonode.contrib.geowatch.factory import build_geowatch_message_resource
+                message = build_geowatch_message_resource('delete', map_obj)
             except:
-                print "Could not build slack message for delete map."
+                message = None
+                print "Could not run GeoWatch for delete map."
 
             delete_map.delay(object_id=map_obj.id)
 
-            try:
-                from geonode.contrib.slack.utils import send_slack_messages
-                send_slack_messages(slack_message)
-            except:
-                print "Could not send slack message for delete map."
+            if message:
+                try:
+                    from geonode.contrib.geowatch.utils import geowatch_run_postdelete
+                    geowatch_run_postdelete(message, 'map')
+                except:
+                    print "Could not run GeoWatch for delete map."
 
         else:
             delete_map.delay(object_id=map_obj.id)

@@ -408,12 +408,12 @@ def layer_metadata(request, layername, template='layers/layer_metadata.html'):
                 category=new_category
                 )
 
-            if getattr(settings, 'SLACK_ENABLED', False):
+            if getattr(settings, 'GEOWATCH_ENABLED', False):  
                 try:
-                    from geonode.contrib.slack.utils import build_slack_message_layer, send_slack_messages
-                    send_slack_messages(build_slack_message_layer("layer_edit", the_layer))
+                    from geonode.contrib.geowatch.utils import geowatch_run
+                    geowatch_run('edit', the_layer)
                 except:
-                    print "Could not send slack message."
+                    print "Error: Could not run GeoWatch for modified layer."
 
             return HttpResponseRedirect(
                 reverse(
