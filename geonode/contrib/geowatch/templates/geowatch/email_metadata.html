@@ -1,0 +1,12 @@
+Dear user {{ username }},
+<br>
+Metadata is important for search and discovery.<br>
+At your convenience, please fill in the following missing metadata fields for your layer <a href="{{ url_detail }}">{{ typename }}</a>:<br> 
+{% for field in fields %}- {{ field }}<br>{% endfor %}
+<br>
+Regards,<br>
+{{ site_name }} Support Team<br>
+<br>
+--<br>
+{{ site_name}}<br>
+{{ baseurl }}<br>

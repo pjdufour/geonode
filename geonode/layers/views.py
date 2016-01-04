@@ -409,11 +409,11 @@ def layer_metadata(request, layername, template='layers/layer_metadata.html'):
                 )
 
             if getattr(settings, 'GEOWATCH_ENABLED', False):  
-                try:
-                    from geonode.contrib.geowatch.utils import geowatch_run
-                    geowatch_run('edit', the_layer)
-                except:
-                    print "Error: Could not run GeoWatch for modified layer."
+                #try:
+                from geonode.contrib.geowatch.utils import geowatch_run
+                geowatch_run('edit', the_layer)
+                #except:
+                #    print "Error: Could not run GeoWatch for modified layer."
 
             return HttpResponseRedirect(
                 reverse(

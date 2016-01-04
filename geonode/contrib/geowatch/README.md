@@ -1,6 +1,6 @@
 # GeoWatch Contrib App
 
-GeoWatch is a spatially-enabled distributed message broker for streaming data.  Geowatch is a contrib app starting with GeoNode 2.4.  The previous `slack` contrib app features are all included in the new `geowatch` contrib app.
+GeoWatch is a spatially-enabled distributed message broker for streaming data.  Geowatch is a contrib app starting with GeoNode 2.4.  The previous `slack` contrib app features are all included in the new `geowatch` contrib app.  The `slack` contrib app is no longer included.
 
 ## Settings
 
@@ -49,22 +49,6 @@ GEOWATCH_WATCHLIST = [
     }
 ]
 ```
-
-## Channels
-
-Geowatch support the following "channels".  Channels are used for streaming notifications.
-
-### Email
-
-TBD
-
-### Kafka
-
-TBD
-
-### Kinesis
-
-TBD
 
 ### Slack
 

@@ -25,12 +25,11 @@ def group_create(request):
             group.join(request.user, role="manager")
 
             if getattr(settings, 'GEOWATCH_ENABLED', False):
-                if 1==1:
-                #try:
-                    from geonode.contrib.geowatch.utils import run_watchlist
-                    run_watchlist('new', group)
-                #except:
-                #    print "Could not run GeoWatch watchlist for new group."
+                try:
+                    from geonode.contrib.geowatch.utils import geowatch_run
+                    geowatch_run('new', group)
+                except:
+                    print "Could not run GeoWatch for new group."
 
             return HttpResponseRedirect(
                 reverse(

@@ -25,7 +25,7 @@ def geowatch_run(actiontype, instance):
     brokers = provision_brokers(
         settings.GEOWATCH_BROKERS_EVENT,
         globalconfig=settings.GEOWATCH_CONFIG,
-        templates=templates, 
+        templates=templates,
         brokerfilter=brokerfilter)
     for b in brokers:
         b.receive_message(m)
@@ -43,6 +43,7 @@ def geowatch_run_postdelete(message, targettype):
     for b in brokers:
         b.receive_message(message)
         b.close()
+
 
 def build_geowatch_message_resource(actiontype, resource):
 

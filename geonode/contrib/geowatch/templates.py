@@ -22,37 +22,37 @@ HTML_MESSAGE_TEMPLATES = [
   {
         "actiontype": ["new"],
         "targettype":  ["layer", "map", "document"],
-        "template": "A new {type} <a href=\"{url_detail}\">{title}</a> has been added to {sitename} by {owner_name}.  {url_detail}"
+        "template": "A new {type} <a href=\"{url_detail}\">{title}</a> has been added to {site_name} by {owner_name}.  {url_detail}"
   },
   {
         "actiontype": ["edit"],
         "targettype":  ["layer", "map", "document"],
-        "template": "A {type} <a href=\"{url_detail}\">{title}</a> has been modified on {sitename} by {owner_name}.  {url_detail}"
+        "template": "A {type} <a href=\"{url_detail}\">{title}</a> has been modified on {site_name} by {owner_name}.  {url_detail}"
   },
   {
         "actiontype": ["delete"],
         "targettype":  ["layer", "map", "document"],
-        "template": "The {type} {title} has been deleted from {sitename}.  {baseurl}"
+        "template": "The {type} {title} has been deleted from {site_name}.  {baseurl}"
   },
   {
         "actiontype": ["new"],
         "targettype":  ["group"],
-        "template": "A new {type} <a href=\"{url_detail}\">{title}</a> has been added to {sitename}.  {url_detail}"
+        "template": "A new {type} <a href=\"{url_detail}\">{title}</a> has been added to {site_name}.  {url_detail}"
   },
   {
         "actiontype": ["edit"],
         "targettype":  ["group"],
-        "template": "A {type} <a href=\"{url_detail}\">{title}</a> has been modified on {sitename}.  {url_detail}"
+        "template": "A {type} <a href=\"{url_detail}\">{title}</a> has been modified on {site_name}.  {url_detail}"
   },
   {
         "actiontype": ["delete"],
         "targettype":  ["group"],
-        "template": "The {type} {title} has been deleted from {sitename}.  {baseurl}"
+        "template": "The {type} {title} has been deleted from {site_name}.  {baseurl}"
   },
   {
         "actiontype": ["login"],
         "targettype":  ["user"],
-        "template": "User <a href=\"{url_detail}\">{username}</a> has been modified on {sitename}.  {url_detail}"
+        "template": "User <a href=\"{url_detail}\">{username}</a> has been modified on {site_name}.  {url_detail}"
   }
 ]
 
@@ -60,37 +60,37 @@ SNS_MESSAGE_TEMPLATES = [
   {
         "actiontype": ["new"],
         "targettype":  ["layer", "map", "document"],
-        "template": "A new {type} {title} has been added to {sitename} by {owner_name}.  {url_detail}"
+        "template": "A new {type} {title} has been added to {site_name} by {owner_name}.  {url_detail}"
   },
   {
         "actiontype": ["edit"],
         "targettype":  ["layer", "map", "document"],
-        "template": "A {type} {title} has been modified on {sitename} by {owner_name}.  {url_detail}"
+        "template": "A {type} {title} has been modified on {site_name} by {owner_name}.  {url_detail}"
   },
   {
         "actiontype": ["delete"],
         "targettype":  ["layer", "map", "document"],
-        "template": "The {type} {title} has been deleted from {sitename}.  {baseurl}"
+        "template": "The {type} {title} has been deleted from {site_name}.  {baseurl}"
   },
   {
         "actiontype": ["new"],
         "targettype":  ["group"],
-        "template": "A new {type} {title} has been added to {sitename}.  {url_detail}"
+        "template": "A new {type} {title} has been added to {site_name}.  {url_detail}"
   },
   {
         "actiontype": ["edit"],
         "targettype":  ["group"],
-        "template": "A {type} {title} has been modified on {sitename}.  {url_detail}"
+        "template": "A {type} {title} has been modified on {site_name}.  {url_detail}"
   },
   {
         "actiontype": ["delete"],
         "targettype":  ["group"],
-        "template": "The {type} {title} has been deleted from {sitename}.  {baseurl}"
+        "template": "The {type} {title} has been deleted from {site_name}.  {baseurl}"
   },
   {
         "actiontype": ["login"],
         "targettype":  ["user"],
-        "template": "User {username} has been modified on {sitename}.  {url_detail}"
+        "template": "User {username} has been modified on {site_name}.  {url_detail}"
   }
 ]
 
@@ -103,9 +103,9 @@ SLACK_MESSAGE_TEMPLATES = [
             "attachments": [{
                 "title": "{title}",
                 "title_link": "{url_detail}",
-                "fallback": "A new {type} {title} has been added to {sitename} by {owner_name}.  {url_detail}",
+                "fallback": "A new {type} {title} has been added to {site_name} by {owner_name}.  {url_detail}",
                 "text": "A new {type} <{url_detail}|{title}> has been added to "
-                        "<{baseurl}|{sitename}> by <{owner_url}|{owner_name}>.",
+                        "<{baseurl}|{site_name}> by <{owner_url}|{owner_name}>.",
                 "thumb_url": "{thumbnail_url}",
                 "fields": [{
                      "title": "Zipped Shapefile",
@@ -139,9 +139,9 @@ SLACK_MESSAGE_TEMPLATES = [
             "attachments": [{
                 "title": "{title}",
                 "title_link": "{url_detail}",
-                "fallback": "The {type} {title} has been modified on {sitename} by {owner_name}.  {url_detail}",
+                "fallback": "The {type} {title} has been modified on {site_name} by {owner_name}.  {url_detail}",
                 "text": "The {type} <{url_detail}|{title}> has been modified on "
-                        "<{baseurl}|{sitename}> by <{owner_url}|{owner_name}>.",
+                        "<{baseurl}|{site_name}> by <{owner_url}|{owner_name}>.",
                 "thumb_url": "{thumbnail_url}",
                 "fields": [{
                      "title": "Zipped Shapefile",
@@ -174,8 +174,8 @@ SLACK_MESSAGE_TEMPLATES = [
         {
             "attachments": [{
                 "title": "{title}",
-                "fallback": "The {type} {title} has been deleted from {sitename}.  {baseurl}",
-                "text": "The {type} {title} has been deleted from <{baseurl}|{sitename}>.",
+                "fallback": "The {type} {title} has been deleted from {site_name}.  {baseurl}",
+                "text": "The {type} {title} has been deleted from <{baseurl}|{site_name}>.",
                 "color": "#FF0000"
             }]
         }
@@ -188,9 +188,9 @@ SLACK_MESSAGE_TEMPLATES = [
             "attachments": [{
                 "title": "{title}",
                 "title_link": "{url_detail}",
-                "fallback": "A new {type} {title} has been added to {sitename} by {owner_name}.  {url_detail}",
+                "fallback": "A new {type} {title} has been added to {site_name} by {owner_name}.  {url_detail}",
                 "text": "A new {type} <{url_detail}|{title}> has been added to "
-                        "<{baseurl}|{sitename}> by <{owner_url}|{owner_name}>.",
+                        "<{baseurl}|{site_name}> by <{owner_url}|{owner_name}>.",
                 "thumb_url": "{thumbnail_url}",
                 "fields": [{
                      "title": "View Map",
@@ -214,9 +214,9 @@ SLACK_MESSAGE_TEMPLATES = [
             "attachments": [{
                 "title": "{title}",
                 "title_link": "{url_detail}",
-                "fallback": "The {type} {title} has been modified on {sitename} by {owner_name}.  {url_detail}",
+                "fallback": "The {type} {title} has been modified on {site_name} by {owner_name}.  {url_detail}",
                 "text": "The {type} <{url_detail}|{title}> has been modified on "
-                        "<{baseurl}|{sitename}> by <{owner_url}|{owner_name}>.",
+                        "<{baseurl}|{site_name}> by <{owner_url}|{owner_name}>.",
                 "thumb_url": "{thumbnail_url}",
                 "fields": [{
                      "title": "View Map",
@@ -239,8 +239,8 @@ SLACK_MESSAGE_TEMPLATES = [
         {
             "attachments": [{
                 "title": "{title}",
-                "fallback": "The {type} {title} has been deleted from {sitename}.  {baseurl}",
-                "text": "The {type} {title} has been deleted from <{baseurl}|{sitename}>.",
+                "fallback": "The {type} {title} has been deleted from {site_name}.  {baseurl}",
+                "text": "The {type} {title} has been deleted from <{baseurl}|{site_name}>.",
                 "color": "#FF0000"
             }]
         }
@@ -253,9 +253,9 @@ SLACK_MESSAGE_TEMPLATES = [
             "attachments": [{
                 "title": "{title}",
                 "title_link": "{url_detail}",
-                "fallback": "A new {type} {title} has been added to {sitename} by {owner_name}.  {url_detail}",
+                "fallback": "A new {type} {title} has been added to {site_name} by {owner_name}.  {url_detail}",
                 "text": "A new {type} <{url_detail}|{title}> has been added to "
-                        "<{baseurl}|{sitename}> by <{owner_url}|{owner_name}>.",
+                        "<{baseurl}|{site_name}> by <{owner_url}|{owner_name}>.",
                 "thumb_url": "{thumbnail_url}",
                 "fields": [{
                      "title": "Download Document",
@@ -274,9 +274,9 @@ SLACK_MESSAGE_TEMPLATES = [
             "attachments": [{
                 "title": "{title}",
                 "title_link": "{url_detail}",
-                "fallback": "The {type} {title} has been modified on {sitename} by {owner_name}.  {url_detail}",
+                "fallback": "The {type} {title} has been modified on {site_name} by {owner_name}.  {url_detail}",
                 "text": "The {type} <{url_detail}|{title}> has been modified on "
-                        "<{baseurl}|{sitename}> by <{owner_url}|{owner_name}>.",
+                        "<{baseurl}|{site_name}> by <{owner_url}|{owner_name}>.",
                 "thumb_url": "{thumbnail_url}",
                 "fields": [{
                       "title": "Download Document",
@@ -293,8 +293,8 @@ SLACK_MESSAGE_TEMPLATES = [
         "template": {
             "attachments": [{
                 "title": "{title}",
-                "fallback": "The {type} {title} has been deleted from {sitename}.  {baseurl}",
-                "text": "The {type} {title} has been deleted from <{baseurl}|{sitename}>.",
+                "fallback": "The {type} {title} has been deleted from {site_name}.  {baseurl}",
+                "text": "The {type} {title} has been deleted from <{baseurl}|{site_name}>.",
                 "color": "#FF0000"
             }]
         }
@@ -307,9 +307,9 @@ SLACK_MESSAGE_TEMPLATES = [
             "attachments": [{
                 "title": "{title}",
                 "title_link": "{url_detail}",
-                "fallback": "A new {type} {title} has been added to {sitename}.  {url_detail}",
+                "fallback": "A new {type} {title} has been added to {site_name}.  {url_detail}",
                 "text": "A new {type} <{url_detail}|{title}> has been added to "
-                        "<{baseurl}|{sitename}>.",
+                        "<{baseurl}|{site_name}>.",
                 "thumb_url": "{thumbnail_url}",
                 "color": "#000099"
             }]
@@ -323,9 +323,9 @@ SLACK_MESSAGE_TEMPLATES = [
             "attachments": [{
                 "title": "{title}",
                 "title_link": "{url_detail}",
-                "fallback": "The {type} {title} has been modified on {sitename}.  {url_detail}",
+                "fallback": "The {type} {title} has been modified on {site_name}.  {url_detail}",
                 "text": "The {type} <{url_detail}|{title}> has been modified on "
-                        "<{baseurl}|{sitename}>.",
+                        "<{baseurl}|{site_name}>.",
                 "thumb_url": "{thumbnail_url}",
                 "color": "#000099"
             }]
@@ -337,8 +337,8 @@ SLACK_MESSAGE_TEMPLATES = [
         "template": {
             "attachments": [{
                 "title": "{title}",
-                "fallback": "The {type} {title} has been deleted from {sitename}.  {baseurl}",
-                "text": "The {type} {title} has been deleted from <{baseurl}|{sitename}>.",
+                "fallback": "The {type} {title} has been deleted from {site_name}.  {baseurl}",
+                "text": "The {type} {title} has been deleted from <{baseurl}|{site_name}>.",
                 "color": "#FF0000"
             }]
         }
@@ -351,9 +351,9 @@ SLACK_MESSAGE_TEMPLATES = [
             "attachments": [{
                 "title": "{username}",
                 "title_link": "{url_detail}",
-                "fallback": "User {username} (with access level {access}) has logged into {sitename}.  {url_detail}",
+                "fallback": "User {username} (with access level {access}) has logged into {site_name}.  {url_detail}",
                 "text": "User <{url_detail}|{username}> (with {access} access level) has logged into "
-                        "<{baseurl}|{sitename}>.",
+                        "<{baseurl}|{site_name}>.",
                 "thumb_url": "{thumbnail_url}",
                 "color": "{color}"
             }]

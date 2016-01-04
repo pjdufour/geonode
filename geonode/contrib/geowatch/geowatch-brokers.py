@@ -1,4 +1,5 @@
-from multiprocessing import Process, Lock, Queue, cpu_count
+from multiprocessing import Process, cpu_count
+# from multiprocessing import Lock, Queue
 
 from geowatchutil.runtime import provision_brokers
 
