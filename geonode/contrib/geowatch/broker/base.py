@@ -3,11 +3,6 @@ from account.models import EmailAddress
 from geowatchutil.base import GeoWatchError
 from geowatchutil.broker.base import GeoWatchBroker
 
-# from django.conf import settings
-# from django.core.mail import send_mail
-# from django.core.mail import EmailMultiAlternatives
-# from django.shortcuts import get_object_or_404
-# from django.template import Context, Template
 from django.template.loader import get_template
 
 from geonode.layers.models import Layer
@@ -40,7 +35,7 @@ class GeoNodeBroker(GeoWatchBroker):
     def _get_email(self, user):
         email = None
         try:
-            email = EmailAddress.objects.filter(user=user, primary=True, verified=True)[0]
+            email = EmailAddress.objects.filter(user=user, primary=True, verified=True)[0].email
         except:
             print "Could not get email for user"+user.username
         return email

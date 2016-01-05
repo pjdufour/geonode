@@ -3,7 +3,7 @@ from geowatchutil.runtime import provision_brokers
 from django.conf import settings
 
 from geonode.contrib.geowatch import templates
-from geonode.contrib.geowatch.mapping.base import forward_layer, forward_map, forward_document, forward_group, forward_user
+from geonode.contrib.geowatch.mapping.utils import forward_layer, forward_map, forward_document, forward_group, forward_user
 
 from geonode.groups.models import GroupProfile
 from geonode.people.models import Profile
