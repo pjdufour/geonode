@@ -27,9 +27,9 @@ class GeoNodeBrokerMetadata(GeoNodeBroker):
         to_email = kwargs.get('to_email', None)
         text_content = kwargs.get('text_content', None)
         html_content = kwargs.get('html_content', None)
-        return
         subject = site_name+": Missing metadata on Layer"
         from_email = settings.DEFAULT_FROM_EMAIL
+        return
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to_email])
         msg.attach_alternative(html_content, "text/html")
         msg.send()

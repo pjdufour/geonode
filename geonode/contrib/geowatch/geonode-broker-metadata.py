@@ -5,7 +5,7 @@ from geowatchutil.runtime import build_broker_kwargs
 from django.conf import settings
 
 from geonode.contrib.geowatch import templates
-from geonode.contrib.geowatch.broker.geowatch_broker_metadata import GeoNodeBrokerMetadata
+from geonode.contrib.geowatch.broker.geonode_broker_metadata import GeoNodeBrokerMetadata
 
 verbose = True
 broker_config = settings.GEOWATCH_BROKER_METADATA

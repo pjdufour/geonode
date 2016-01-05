@@ -2,7 +2,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 
 from geonode.base.models import Link
-from geonode.contrib.geowatch.mappings.base import GeoWatchMappingResource
+from geonode.contrib.geowatch.mapping.base import GeoWatchMappingResource
 
 
 class GeoWatchMappingLayer(GeoWatchMappingResource):

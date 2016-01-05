@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
-from geonode.contrib.geowatch.mappings.base import GeoWatchMappingInstance
+from geonode.contrib.geowatch.mapping.base import GeoWatchMappingInstance
 
 
 class GeoWatchMappingGroup(GeoWatchMappingInstance):

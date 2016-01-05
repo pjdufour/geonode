@@ -3,7 +3,7 @@ from avatar.templatetags.avatar_tags import avatar_url
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
-from geonode.contrib.geowatch.mappings.base import GeoWatchMappingInstance
+from geonode.contrib.geowatch.mapping.base import GeoWatchMappingInstance
 
 
 class GeoWatchMappingUser(GeoWatchMappingInstance):
