@@ -20,7 +20,7 @@ class GeoNodeBroker(GeoWatchBroker):
     def _pre(self):
         pass
 
-    def _post(self):
+    def _post(self, messages=None):
         pass
 
     def _get_owner(self, data):
