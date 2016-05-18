@@ -28,7 +28,7 @@ from geonode.utils import forward_mercator, inverse_mercator
 
 class GeoNodeSmokeTests(TestCase):
 
-    fixtures = ['people_data.json']
+    fixtures = ['people_data.yml']
     GEOSERVER = False
 
     def setUp(self):

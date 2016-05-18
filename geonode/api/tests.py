@@ -27,7 +27,7 @@ from geonode.layers.models import Layer
 
 class PermissionsApiTests(ResourceTestCase):
 
-    fixtures = ['initial_data.json', 'bobby']
+    fixtures = ['initial_data.yml', 'bobby']
 
     def setUp(self):
         super(PermissionsApiTests, self).setUp()
@@ -126,7 +126,7 @@ class SearchApiTests(ResourceTestCase):
 
     """Test the search"""
 
-    fixtures = ['initial_data.json', 'bobby']
+    fixtures = ['initial_data.yml', 'bobby']
 
     def setUp(self):
         super(SearchApiTests, self).setUp()

@@ -256,9 +256,9 @@ GEONODE_CONTRIB_APPS = (
 # GEONODE_APPS = GEONODE_APPS + GEONODE_CONTRIB_APPS
 
 INSTALLED_APPS = (
-    
+
     'modeltranslation',
-    
+
     # Boostrap admin theme
     # 'django_admin_bootstrapped.bootstrap3',
     # 'django_admin_bootstrapped',
@@ -307,7 +307,7 @@ INSTALLED_APPS = (
     'tastypie',
     'polymorphic',
     'guardian',
-    
+
 ) + GEONODE_APPS
 
 LOGGING = {
@@ -639,7 +639,7 @@ MAP_BASELAYERS = [{
     "name": "naip",
     "group": "background",
     "visibility": False
-}, 
+},
 {
     "source": {"ptype": "gxp_mapboxsource"},
 }]
@@ -697,6 +697,10 @@ SRID = {
 }
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+SERIALIZATION_MODULES = {
+    'yml': "django.core.serializers.pyyaml"
+}
 
 # Require users to authenticate before using Geonode
 LOCKDOWN_GEONODE = False
@@ -893,7 +897,7 @@ except ImportError:
     pass
 
 try:
-    BING_LAYER = {    
+    BING_LAYER = {
         "source": {
             "ptype": "gxp_bingsource",
             "apiKey": BING_API_KEY

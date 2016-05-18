@@ -41,7 +41,7 @@ from geonode.people.models import Profile
 
 class SimpleTest(TestCase):
 
-    fixtures = ['initial_data.json']
+    fixtures = ['initial_data.yml']
 
     def setUp(self):
         registry.register(Layer)

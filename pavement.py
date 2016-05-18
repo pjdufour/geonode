@@ -217,7 +217,7 @@ def sync(options):
         pass
     sh("python manage.py syncdb --noinput")
     # sh("python manage.py migrate --noinput")
-    sh("python manage.py loaddata sample_admin.json")
+    sh("python manage.py loaddata sample_admin.yml")
 
 
 @task

@@ -28,7 +28,7 @@ from django.contrib.sites.models import Site
 
 class PeopleTest(TestCase):
 
-    fixtures = ('people_data.json', 'bobby.json')
+    fixtures = ('people_data.yml', 'bobby.yml')
 
     def test_forgot_username(self):
         url = reverse('forgot_username')

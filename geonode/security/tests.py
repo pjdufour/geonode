@@ -36,7 +36,7 @@ from geonode.groups.models import Group
 
 
 class BulkPermissionsTests(ResourceTestCase):
-    fixtures = ['initial_data.json', 'bobby']
+    fixtures = ['initial_data.yml', 'bobby']
 
     def setUp(self):
         super(BulkPermissionsTests, self).setUp()

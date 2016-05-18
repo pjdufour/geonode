@@ -32,7 +32,7 @@ class ServicesTests(TestCase):
     """Tests geonode.services app/module
     """
 
-    fixtures = ['initial_data.json', 'bobby.json', 'people_data.json']
+    fixtures = ['initial_data.yml', 'bobby.yml', 'people_data.yml']
 
     def setUp(self):
         self.user = 'admin'

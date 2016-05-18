@@ -42,7 +42,7 @@ class MapsTest(TestCase):
     """Tests geonode.maps app/module
     """
 
-    fixtures = ['initial_data.json', 'bobby']
+    fixtures = ['initial_data.yml', 'bobby']
 
     def setUp(self):
         self.user = 'admin'

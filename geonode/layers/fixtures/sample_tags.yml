@@ -1,0 +1,34 @@
+---
+- model: "taggit.tag"
+  pk: 1
+  fields:
+    name: "usa"
+    slug: "usa"
+- model: "taggit.tag"
+  pk: 2
+  fields:
+    name: "relief"
+    slug: "relief"
+- model: "taggit.tag"
+  pk: 3
+  fields:
+    name: "isthmus"
+    slug: "isthmus"
+- model: "taggit.taggeditem"
+  pk: 3
+  fields:
+    tag: 1
+    content_type: 20
+    object_id: 1
+- model: "taggit.taggeditem"
+  pk: 2
+  fields:
+    tag: 2
+    content_type: 20
+    object_id: 1
+- model: "taggit.taggeditem"
+  pk: 3
+  fields:
+    tag: 3
+    content_type: 20
+    object_id: 1
