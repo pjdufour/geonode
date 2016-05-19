@@ -18,11 +18,12 @@
 #
 #########################################################################
 
-import autocomplete_light
+from dal import autocomplete
+#import autocomplete_light
 
 from geonode.maps.models import Map
 
-autocomplete_light.autodiscover() # flake8: noqa
+#autocomplete_light.autodiscover() # flake8: noqa
 
 from geonode.base.forms import ResourceBaseForm
 
@@ -37,3 +38,10 @@ class MapForm(ResourceBaseForm):
             'center_x',
             'center_y',
         )
+
+
+class MapLayerForm(forms.ModelForm):
+    class Meta:
+        model = MapLayer
+        fields = '__all__'
+        #widgets = {}

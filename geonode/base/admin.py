@@ -21,13 +21,17 @@
 from django.contrib import admin
 from django.conf import settings
 
-import autocomplete_light
-from autocomplete_light.contrib.taggit_field import TaggitField, TaggitWidget
+from dal import autocomplete
+
+#import autocomplete_light
+#from autocomplete_light.contrib.taggit_field import TaggitField, TaggitWidget
 
 from modeltranslation.admin import TranslationAdmin
 
 from geonode.base.models import (TopicCategory, SpatialRepresentationType, Region, RestrictionCodeType,
                                  ContactRole, Link, License)
+
+from geonode.base.forms import ContactRoleForm, LinkForm
 
 
 class MediaTranslationAdmin(TranslationAdmin):
@@ -105,20 +109,22 @@ class RestrictionCodeTypeAdmin(MediaTranslationAdmin):
 
 
 class ContactRoleAdmin(admin.ModelAdmin):
-    model = ContactRole
+    #model = ContactRole
+    form = ContactRoleForm
     list_display_links = ('id',)
     list_display = ('id', 'contact', 'resource', 'role')
     list_editable = ('contact', 'resource', 'role')
-    form = autocomplete_light.modelform_factory(ContactRole, fields='__all__')
+    #form = autocomplete_light.modelform_factory(ContactRole, fields='__all__')
 
 
 class LinkAdmin(admin.ModelAdmin):
-    model = Link
+    #model = Link
+    form = LinkForm
     list_display_links = ('id',)
     list_display = ('id', 'resource', 'extension', 'link_type', 'name', 'mime')
     list_filter = ('resource', 'extension', 'link_type', 'mime')
     search_fields = ('name', 'resource__title',)
-    form = autocomplete_light.modelform_factory(Link, fields='__all__')
+    #form = autocomplete_light.modelform_factory(Link, fields='__all__')
 
 admin.site.register(TopicCategory, TopicCategoryAdmin)
 admin.site.register(Region, RegionAdmin)

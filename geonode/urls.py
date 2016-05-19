@@ -30,10 +30,10 @@ import geonode.proxy.urls
 
 from geonode.api.urls import api
 
-import autocomplete_light
+#import autocomplete_light
 
 # Setup Django Admin
-autocomplete_light.autodiscover()
+#autocomplete_light.autodiscover()
 
 admin.autodiscover()
 
@@ -98,7 +98,7 @@ urlpatterns = patterns('',
                            name='sitemap'),
 
                        (r'^i18n/', include('django.conf.urls.i18n')),
-                       (r'^autocomplete/', include('autocomplete_light.urls')),
+                       #(r'^autocomplete/', include('autocomplete_light.urls')),
                        (r'^admin/', include(admin.site.urls)),
                        (r'^groups/', include('geonode.groups.urls')),
                        (r'^documents/', include('geonode.documents.urls')),

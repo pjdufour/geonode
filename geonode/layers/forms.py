@@ -21,7 +21,9 @@
 import os
 import tempfile
 import zipfile
-import autocomplete_light
+
+#from dal import autocomplete
+#import autocomplete_light
 
 from django import forms
 try:
@@ -31,7 +33,7 @@ except ImportError:
 from geonode.layers.utils import unzip_file
 from geonode.layers.models import Layer, Attribute
 
-autocomplete_light.autodiscover() # flake8: noqa
+#autocomplete_light.autodiscover() # flake8: noqa
 
 from geonode.base.forms import ResourceBaseForm
 

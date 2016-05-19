@@ -256,9 +256,9 @@ GEONODE_CONTRIB_APPS = (
 # GEONODE_APPS = GEONODE_APPS + GEONODE_CONTRIB_APPS
 
 INSTALLED_APPS = (
-    
+
     'modeltranslation',
-    
+
     # Boostrap admin theme
     # 'django_admin_bootstrapped.bootstrap3',
     # 'django_admin_bootstrapped',
@@ -268,6 +268,10 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
+    # dal (django-autocomplete-light) needs to be installed BEFORE django.contrib.admin
+    # http://django-autocomplete-light.readthedocs.io/en/master/install.html
+    'dal',
+    'dal_select2',
     'django.contrib.admin',
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
@@ -285,7 +289,7 @@ INSTALLED_APPS = (
     'leaflet',
     'django_extensions',
     # 'haystack',
-    'autocomplete_light',
+    #'autocomplete_light',
     'mptt',
     #'modeltranslation',
     'djcelery',
@@ -307,7 +311,7 @@ INSTALLED_APPS = (
     'tastypie',
     'polymorphic',
     'guardian',
-    
+
 ) + GEONODE_APPS
 
 LOGGING = {
@@ -639,7 +643,7 @@ MAP_BASELAYERS = [{
     "name": "naip",
     "group": "background",
     "visibility": False
-}, 
+},
 {
     "source": {"ptype": "gxp_mapboxsource"},
 }]
@@ -893,7 +897,7 @@ except ImportError:
     pass
 
 try:
-    BING_LAYER = {    
+    BING_LAYER = {
         "source": {
             "ptype": "gxp_bingsource",
             "apiKey": BING_API_KEY

@@ -18,8 +18,9 @@
 #
 #########################################################################
 
-import autocomplete_light
-from autocomplete_light.contrib.taggit_field import TaggitField, TaggitWidget
+from dal import autocomplete
+#import autocomplete_light
+#from autocomplete_light.contrib.taggit_field import TaggitField, TaggitWidget
 
 from django import forms
 from django.utils.translation import ugettext as _
@@ -28,7 +29,7 @@ from mptt.forms import TreeNodeMultipleChoiceField
 from bootstrap3_datetime.widgets import DateTimePicker
 from modeltranslation.forms import TranslationModelForm
 
-from geonode.base.models import TopicCategory, Region
+from geonode.base.models import TopicCategory, Region, ContactRole, Link
 from geonode.people.models import Profile
 
 
@@ -169,3 +170,15 @@ class ResourceBaseForm(TranslationModelForm):
             'rating',
             'detail_url'
             )
+
+class ContactRoleForm(forms.ModelForm):
+    class Meta:
+        model = ContactRole
+        fields = '__all__'
+        #widgets = {}
+
+class LinkForm(forms.ModelForm):
+    class Meta:
+        model = Link
+        fields = '__all__'
+        #widgets = {}
