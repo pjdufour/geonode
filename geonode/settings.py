@@ -245,6 +245,7 @@ GEONODE_CONTRIB_APPS = (
     'geonode.contrib.dynamic',
     'geonode.contrib.exif',
     'geonode.contrib.favorite',
+    'geonode.contrib.geodash'
     'geonode.contrib.geogig',
     'geonode.contrib.geosites',
     'geonode.contrib.nlp',
@@ -254,6 +255,7 @@ GEONODE_CONTRIB_APPS = (
 
 # Uncomment the following line to enable contrib apps
 # GEONODE_APPS = GEONODE_APPS + GEONODE_CONTRIB_APPS
+GEONODE_APPS = GEONODE_APPS + ('geonode.contrib.geodash',)
 
 INSTALLED_APPS = (
 
@@ -907,7 +909,7 @@ try:
 except ImportError:
     pass
 
-# Load additonal basemaps, see geonode/contrib/api_basemap/README.md 
+# Load additonal basemaps, see geonode/contrib/api_basemap/README.md
 try:
     from geonode.contrib.api_basemaps import *
 except ImportError:
