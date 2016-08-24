@@ -63,7 +63,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', _DEFAULT_SECRET_KEY)
 
 DATABASE_URL = os.getenv(
     'DATABASE_URL',
-    'spatialite:///{path}'.format(path=os.path.join(PROJECT_ROOT, 'development.db')))
+    'sqlite:///{path}'.format(path=os.path.join(PROJECT_ROOT, 'development.db')))
 
 # Defines settings for development
 DATABASES = {
