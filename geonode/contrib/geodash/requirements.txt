@@ -1,0 +1,12 @@
+numpy
+httplib2
+gunicorn
+psycopg2
+requests
+pyyaml
+pymemcache
+bleach
+markdown
+unidecode
+git+https://github.com/geodashio/geodash-framework-django.git#egg=geodash-framework-django
+git+https://github.com/geodashio/geodash-server.git#egg=geodash-server

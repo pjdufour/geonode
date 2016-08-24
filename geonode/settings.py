@@ -63,7 +63,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', _DEFAULT_SECRET_KEY)
 
 DATABASE_URL = os.getenv(
     'DATABASE_URL',
-    'sqlite:///{path}'.format(path=os.path.join(PROJECT_ROOT, 'development.db')))
+    'spatialite:///{path}'.format(path=os.path.join(PROJECT_ROOT, 'development.db')))
 
 # Defines settings for development
 DATABASES = {
@@ -815,6 +815,10 @@ RESOURCE_PUBLISHING = False
 
 # Settings for EXIF contrib app
 EXIF_ENABLED = False
+
+# Settings for GeoDash contrib app
+GEODASH_ENABLED = True
+SPATIALITE_LIBRARY_PATH = 'mod_spatialite'
 
 # Settings for NLP contrib app
 NLP_ENABLED = False

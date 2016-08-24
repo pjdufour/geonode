@@ -95,7 +95,7 @@ def setup_geoserver(options):
     grab(options.get('geoserver', dev_config['GEOSERVER_URL']), geoserver_bin, "geoserver binary")
     grab(options.get('jetty', dev_config['JETTY_RUNNER_URL']), jetty_runner, "jetty runner")
 
-    if not geoserver_dir.exists():
+    if (not geoserver_dir.exists()) or (not geoserver_dir.listdir()):
         geoserver_dir.makedirs()
 
         webapp_dir = geoserver_dir / 'geoserver'

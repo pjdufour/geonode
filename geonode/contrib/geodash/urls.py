@@ -21,17 +21,13 @@
 from django.conf.urls import url
 from geodashserver import views
 
-admin.autodiscover()
-
-js_info_dict = {
-    'domain': 'djangojs',
-    'packages': ('geodashserver',)
-}
-
-sitemaps = {
-}
 
 urlpatterns = [
+
+    url(
+        r'^$',
+        views.home,
+        name='geodash_home'),
 
     url(
         r'^dashboard/(?P<slug>[^/]+)$',

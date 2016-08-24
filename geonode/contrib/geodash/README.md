@@ -8,6 +8,12 @@ The `geonode.contrib.geodash` contrib app is a lighweight connector for GeoDash 
 
 You can learn more at the [Medium post](https://medium.com/@pjdufour.dev/introducing-geodash-18f1d68bd6f5#.47zrhm8dx).
 
+## Installation
+
+```
+pip install -r geonode/contrib/geodash/requirements.txt
+```
+
 ## Settings
 
 ### Activation
