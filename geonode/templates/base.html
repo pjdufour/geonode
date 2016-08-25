@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{{ SITE_NAME }}{% endblock %}</title>
     {% block head %}
       {% if DEBUG_STATIC %}
@@ -34,7 +34,7 @@
     <![endif]-->
     <link rel="search" type="application/opensearchdescription+xml" href="/catalogue/opensearch" title="GeoNode Search"/>
   </head>
-  
+
   <body class="{% block body_class %}{% endblock %}">
 
     {% block header %}
@@ -58,6 +58,11 @@
             <li id="nav_maps">
               <a href="{% url "maps_browse" %}">{% trans "Maps" %}</a>
             </li>
+            {% if GEODASH_ENABLED %}
+            <li id="nav_dashboards">
+              <a href="{% url "geodash_home" %}">{% trans "Dashboards" %}</a>
+            </li>
+            {% endif %}
             <li id="nav_documents">
               <a href="{% url "document_browse" %}">{% trans "Documents" %}</a>
             </li>
@@ -99,7 +104,7 @@
             {% else %}
             <li>
               <a href="#" data-toggle="modal" data-target="#SigninModal" role="button" >
-                {% trans "Sign in" %} 
+                {% trans "Sign in" %}
               </a>
             </li>
             {% endif %}
@@ -134,7 +139,7 @@
     </div>
     {% endblock middle %}
   </div>
-    
+
     {% block footer %}
     <footer class="footer">
       <div class="container">
@@ -244,7 +249,7 @@
     </div>
     {% endif %}
     <!-- End of Modal -->
-    
+
     {% if DEBUG_STATIC %}
     <script src="{{ STATIC_URL }}lib/js/jquery.min.js?v={{ VERSION }}"></script>
     <script src="{{ STATIC_URL }}lib/js/jquery.dataTables.js?v={{ VERSION }}"></script>

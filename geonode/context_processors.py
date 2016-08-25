@@ -107,6 +107,10 @@ def resource_urls(request):
         USE_NOTIFICATIONS=('notification' in settings.INSTALLED_APPS),
         DEFAULT_ANONYMOUS_VIEW_PERMISSION=getattr(settings, 'DEFAULT_ANONYMOUS_VIEW_PERMISSION', False),
         DEFAULT_ANONYMOUS_DOWNLOAD_PERMISSION=getattr(settings, 'DEFAULT_ANONYMOUS_DOWNLOAD_PERMISSION', False),
+        GEODASH_ENABLED=getattr(
+            settings,
+            "GEODASH_ENABLED",
+            False),
         EXIF_ENABLED=getattr(
             settings,
             "EXIF_ENABLED",

@@ -9,4 +9,4 @@ bleach
 markdown
 unidecode
 git+https://github.com/geodashio/geodash-framework-django.git#egg=geodash-framework-django
-git+https://github.com/geodashio/geodash-server.git#egg=geodash-server
+git+https://github.com/geodashio/geodash-server.git@ol3

@@ -12,6 +12,8 @@ You can learn more at the [Medium post](https://medium.com/@pjdufour.dev/introdu
 
 ```
 pip install -r geonode/contrib/geodash/requirements.txt
+python manage.py makemigrations geodashserver
+python manage.py migrate geodashserver
 ```
 
 ## Settings

@@ -818,7 +818,6 @@ EXIF_ENABLED = False
 
 # Settings for GeoDash contrib app
 GEODASH_ENABLED = True
-SPATIALITE_LIBRARY_PATH = 'mod_spatialite'
 
 # Settings for NLP contrib app
 NLP_ENABLED = False
