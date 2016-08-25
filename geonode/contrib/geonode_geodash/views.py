@@ -22,19 +22,20 @@ except ImportError:
     import json
 
 from geodash.cache import provision_memcached_client
+from geodash.utils import build_state_schema
 
-from geonode.contrib.models import GeoDashDashboard
+from geodashserver.geodash.models import GeoDashDashboard
 from geodashserver.security import check_perms_view, expand_perms, expand_users, geodash_assign_default_perms
-from geodashserver.utils import build_initial_state, build_state_schema, build_editor_config
+from geodashserver.utils import build_context, build_initial_state, build_editor_config, build_dashboard_config
 
 SCHEMA_PATH = 'geodashserver/static/geodashserver/build/schema/schema.yml'
 
-def explore(request, template="geodashserver/explore.html"):
+def geodash_browse(request, template="geonode_geodash/geodash_browse.html"):
     now = datetime.datetime.now()
     current_month = now.month
 
-    page = "explore"
-    slug = "explore"
+    page = "browse"
+    slug = "browse"
     map_obj = get_object_or_404(GeoDashDashboard, slug=slug)
 
     config = yaml.load(map_obj.config)

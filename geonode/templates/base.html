@@ -58,11 +58,6 @@
             <li id="nav_maps">
               <a href="{% url "maps_browse" %}">{% trans "Maps" %}</a>
             </li>
-            {% if GEODASH_ENABLED %}
-            <li id="nav_dashboards">
-              <a href="{% url "geodash_home" %}">{% trans "Dashboards" %}</a>
-            </li>
-            {% endif %}
             <li id="nav_documents">
               <a href="{% url "document_browse" %}">{% trans "Documents" %}</a>
             </li>

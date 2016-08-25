@@ -269,7 +269,7 @@ GEONODE_CONTRIB_APPS = (
 
 # Uncomment the following line to enable contrib apps
 # GEONODE_APPS = GEONODE_APPS + GEONODE_CONTRIB_APPS
-GEONODE_APPS = GEONODE_APPS + ('geonode.contrib.geodash',)
+#GEONODE_APPS = GEONODE_APPS + ('geodashserver', 'geonode.contrib.geonode_geodash',)
 
 INSTALLED_APPS = (
 
@@ -817,7 +817,7 @@ RESOURCE_PUBLISHING = False
 EXIF_ENABLED = False
 
 # Settings for GeoDash contrib app
-GEODASH_ENABLED = True
+GEODASH_ENABLED = False
 
 # Settings for NLP contrib app
 NLP_ENABLED = False
