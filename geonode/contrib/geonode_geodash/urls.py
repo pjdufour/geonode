@@ -19,7 +19,7 @@
 #########################################################################
 
 from django.conf.urls import url
-from geonode.contrib.geodash import views
+from geonode.contrib.geonode_geodash import views
 
 
 urlpatterns = [
@@ -31,12 +31,12 @@ urlpatterns = [
 
     url(
         r'^map-schema[.]json$',
-        views.geodash_map_schema,
-        name='geodash_map_schema'),
+        views.geonode_geodash_map_schema,
+        name='geonode_geodash_map_schema'),
 
     url(
         r'^api/dashboard/config/geodash_dashboard_(?P<slug>[^/]+)[.](?P<extension>[^.]+)$',
-        views.geodash_dashboard_config,
-        name='geodash_dashboard_config'),
+        views.geonode_geodash_dashboard_config,
+        name='geonode_geodash_dashboard_config'),
 
 ]

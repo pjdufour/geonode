@@ -22,15 +22,15 @@ except ImportError:
     import json
 
 from geodash.cache import provision_memcached_client
-from geodash.utils import build_state_schema
+from geodash.utils import build_state_schema, build_context, build_initial_state, build_editor_config, build_dashboard_config
+from geodash.security import check_perms_view, expand_perms, expand_users, geodash_assign_default_perms
 
-from geodashserver.geodash.models import GeoDashDashboard
-from geodashserver.security import check_perms_view, expand_perms, expand_users, geodash_assign_default_perms
-from geodashserver.utils import build_context, build_initial_state, build_editor_config, build_dashboard_config
+from geonode.contrib.geonode_geodash.models import GeoDashDashboard
+
 
 SCHEMA_PATH = 'geodashserver/static/geodashserver/build/schema/schema.yml'
 
-def geodash_browse(request, template="geonode_geodash/geodash_browse.html"):
+def geonode_geodash_browse(request, template="geodashserver/explore.html"):
     now = datetime.datetime.now()
     current_month = now.month
 
@@ -47,7 +47,7 @@ def geodash_browse(request, template="geonode_geodash/geodash_browse.html"):
 
     return render_to_response(template, RequestContext(request, ctx))
 
-def geodash_dashboard_config(request, slug=None, extension="json"):
+def geonode_geodash_dashboard_config(request, slug=None, extension="json"):
 
     map_obj = get_object_or_404(GeoDashDashboard, slug=slug)
     check_perms_view(request, map_obj, raiseErrors=True)
@@ -62,6 +62,6 @@ def geodash_dashboard_config(request, slug=None, extension="json"):
     else:
         raise Http404("Unknown config format.")
 
-def geodash_map_schema(request):
+def geonode_geodash_map_schema(request):
     map_config_schema = yaml.load(file(SCHEMA_PATH,'r'))
     return HttpResponse(json.dumps(map_config_schema, default=jdefault), content_type="application/json")
