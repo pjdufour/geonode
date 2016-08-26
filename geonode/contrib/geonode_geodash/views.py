@@ -30,7 +30,7 @@ from geonode.contrib.geonode_geodash.models import GeoDashDashboard
 
 SCHEMA_PATH = 'geodashserver/static/geodashserver/build/schema/schema.yml'
 
-def geonode_geodash_browse(request, template="geodashserver/explore.html"):
+def geonode_geodash_browse(request, template="geonode_geodash/base.html"):
     now = datetime.datetime.now()
     current_month = now.month
 
