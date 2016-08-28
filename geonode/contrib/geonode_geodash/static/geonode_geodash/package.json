@@ -15,19 +15,23 @@
   "private": "false",
   "devDependencies": {
     "del": "*",
-    "merge": "*",
+    "expand-home-dir": "*",
     "gulp": "^3.9.0",
-    "gulp-util": "*",
     "gulp-angular-templatecache": "^1.8.0",
     "gulp-concat": "*",
+    "gulp-expect-file": "0.0.7",
     "gulp-jshint": "*",
     "gulp-less": "*",
     "gulp-minify": "*",
     "gulp-rename": "*",
     "gulp-uglify": "*",
+    "gulp-util": "*",
+    "jshint": "*",
+    "merge": "*",
     "path": "*",
     "yamljs": "^0.2.7",
     "yargs": "*",
-    "expand-home-dir": "*"
+    "git-clone": "*",
+    "sync": "*"
   }
 }

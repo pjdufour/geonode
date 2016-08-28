@@ -2,7 +2,7 @@
 
 {% block header %}
 {% with "GeoDash - "|add:map_config.title as navbar_title %}
-{% include "geodashserver/_includes/header.html"%}
+{% include "geonode_geodash/_includes/header.html"%}
 {% endwith %}
 {% endblock %}
 
@@ -25,8 +25,8 @@
 
 {% block modals %}
 {{ block.super }}
-{% include "geodashserver/_includes/config.html" %}
-{% include "geodashserver/_includes/security.html" %}
+{% include "geodash/_includes/config.html" %}
+{% include "geodash/_includes/security.html" %}
 {% endblock %}
 
 {% block map_controllers %}

@@ -30,6 +30,11 @@ urlpatterns = [
         name='geonode_geodash_browse'),
 
     url(
+        r'^dashboard/(?P<slug>[^/]+)$',
+        views.geonode_geodash_dashboard,
+        name='geonode_geodash_dashboard'),
+
+    url(
         r'^map-schema[.]json$',
         views.geonode_geodash_map_schema,
         name='geonode_geodash_map_schema'),
@@ -38,5 +43,21 @@ urlpatterns = [
         r'^api/dashboard/config/geodash_dashboard_(?P<slug>[^/]+)[.](?P<extension>[^.]+)$',
         views.geonode_geodash_dashboard_config,
         name='geonode_geodash_dashboard_config'),
+
+    url(
+        r'^api/dashboard/security/(?P<slug>[^/]+)[.](?P<extension>[^.]+)$',
+        views.geonode_geodash_dashboard_security,
+        name='geonode_geodash_dashboard_security'),
+
+
+    url(
+        r'^api/dashboard/config/new$',
+        views.geonode_geodash_dashboard_config_new,
+        name='geonode_geodash_dashboard_config_new'),
+
+    url(
+        r'^api/dashboard/(?P<slug>[^/]+)/config/save$',
+        views.geonode_geodash_dashboard_config_save,
+        name='geonode_geodash_dashboard_config_save'),
 
 ]

@@ -86,3 +86,5 @@ uploaded
 development.db
 master
 slave
+
+geonode/contrib/geonode_geodash/static/geonode_geodash/src/geodash/.cache/

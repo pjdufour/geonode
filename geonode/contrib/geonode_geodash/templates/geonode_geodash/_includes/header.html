@@ -8,12 +8,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{% url "home" %}">
-          <span>
-            <img class="wfp-logo" id="logo" src="{{ STATIC_URL}}geodashserver/assets/img/wfp_logo_72_white.png" alt="wfp_logo">
-          </span>
-          {{ navbar_title }}
-        </a>
+        <a class="navbar-brand" href="{% url "home" %}">{{ navbar_title }}</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav mapgive-font float-right">

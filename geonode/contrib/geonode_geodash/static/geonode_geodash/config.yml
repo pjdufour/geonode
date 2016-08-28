@@ -1,21 +1,26 @@
 ---
-name: geonode_geodash
+name: geonodegeodash
 version: "0.0.1"
 description: "GeoNode GeoDash Contrib App 1.x"
 path:
   geodash: "./src/geodash"
 less:
   pre:
-    - "./src/geonodegeodash.less"
+    - "./src/geodash/global/geonodegeodash.less"
   paths:
-    - "./global"
+    - "./src/geodash/global"
   outfile: "main.css"
   dest: "./build/css/"
 bootstrap:
   src: "/home/vagrant/geodash-framework-django.git/geodash/static/geodash/lib/bootstrap/3.3.5/less"
-  variables: "./src/variables.less"
+  variables: "./src/less/bootstrap/variables.less"
   dest: "./build/bootstrap"
 plugins:
+  #- https://github.com/geodashio/geodash-plugin-map-map.git
+  #- https://github.com/geodashio/geodash-plugin-editor-welcome
+  #- https://github.com/geodashio/geodash-plugin-editor-sidebar
+  #- https://github.com/geodashio/geodash-plugin-main.git
+  # For development, you can point to local copies
   - file:///home/vagrant/geodash-plugin-map-map.git
   - file:///home/vagrant/geodash-plugin-editor-welcome.git
   - file:///home/vagrant/geodash-plugin-editor-sidebar.git
@@ -38,7 +43,7 @@ compiler:
   list: []
 resources:
   - name: geonodegeodash.less
-    path: ./src/geonodegeodash.less
+    path: ./src/geodash/global/geonodegeodash.less
   - name: bootstrap.css
     path: ./build/bootstrap/bootstrap.css
   - name: polyfill.min.js

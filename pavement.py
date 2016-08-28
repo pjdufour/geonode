@@ -133,6 +133,15 @@ def static(options):
 
 
 @task
+def geodash(options):
+    with pushd('geonode/contrib/geonode_geodash/static/geonode_geodash'):
+        sh('gulp')
+
+def geodash_bootstrap(options):
+    with pushd('geonode/contrib/geonode_geodash/static/geonode_geodash'):
+        sh('gulp bootstrap:compile')
+
+@task
 @needs([
     'setup_geoserver',
 ])
