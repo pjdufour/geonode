@@ -25,6 +25,7 @@ plugins:
   - file:///home/vagrant/geodash-plugin-editor-welcome.git
   - file:///home/vagrant/geodash-plugin-editor-sidebar.git
   - file:///home/vagrant/geodash-plugin-main.git
+  - geonodegeodash
 dependencies:
   production:
     javascript:

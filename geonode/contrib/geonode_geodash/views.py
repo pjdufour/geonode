@@ -31,6 +31,7 @@ from geonode.contrib.geonode_geodash.models import GeoDashDashboard
 from geonode.contrib.geonode_geodash.utils import expand_users
 
 SCHEMA_PATH = 'geonode/contrib/geonode_geodash/static/geonode_geodash/build/schema/schema.yml'
+ENDPOINTS_PATH = 'geonode/contrib/geonode_geodash/static/geonode_geodash/build/api/endpoints.yml'
 
 def geonode_geodash_browse(request, template="geonode_geodash/browse.html"):
     now = datetime.datetime.now()
@@ -62,15 +63,7 @@ def geonode_geodash_dashboard(request, slug=None, template="geonode_geodash/dash
 
     config = build_dashboard_config(map_obj)
     config_schema = yaml.load(file(SCHEMA_PATH,'r'))
-
-    config['api'] = {
-        'save': '/dashboards/api/dashboard/{{ slug }}/config/save',
-        'saveas': '/dashboards/api/dashboard/config/new',
-        'download_config_json': '/dashboards/api/dashboard/config/geodash_dashboard_{{ slug }}.json',
-        'download_config_yaml': '/dashboards/api/dashboard/config/geodash_dashboard_{{ slug }}.yml',
-        'download_security_json': '/dashboards/api/dashboard/security/{{ slug }}.json',
-        'download_security_yaml': '/dashboards/api/dashboard/security/{{ slug }}.yml'
-    }
+    endpoints = yaml.load(file(ENDPOINTS_PATH,'r'))
 
     editor_template = "geodash/editor/editor.yml"
     editor_yml = get_template(editor_template).render({})
@@ -90,6 +83,8 @@ def geonode_geodash_dashboard(request, slug=None, template="geonode_geodash/dash
         "map_config_schema_json": json.dumps(config_schema),
         "editor": editor,
         "editor_json": json.dumps(editor),
+        "endpoints": endpoints,
+        "endpoints_json": json.dumps(endpoints),
         "security": security,
         "security_json": json.dumps(security),
         "security_schema": security_schema,

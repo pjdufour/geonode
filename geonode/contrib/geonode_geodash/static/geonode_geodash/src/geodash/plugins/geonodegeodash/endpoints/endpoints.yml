@@ -1,0 +1,7 @@
+---
+save: "/dashboards/api/dashboard/{{ slug }}/config/save"
+saveas: "/dashboards/api/dashboard/config/new"
+download_config_json: "/dashboards/api/dashboard/config/geodash_dashboard_{{ slug }}.json"
+download_config_yaml: "/dashboards/api/dashboard/config/geodash_dashboard_{{ slug }}.yml"
+download_security_json: "/dashboards/api/dashboard/security/{{ slug }}.json"
+download_security_yaml: "/dashboards/api/dashboard/security/{{ slug }}.yml"

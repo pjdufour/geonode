@@ -1,0 +1,4 @@
+---
+name: geonodegeodash
+endpoints:
+  - endpoints.yml

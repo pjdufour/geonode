@@ -32,6 +32,7 @@
     "yamljs": "^0.2.7",
     "yargs": "*",
     "git-clone": "*",
-    "sync": "*"
+    "sync": "*",
+    "mkdirp": "*"
   }
 }
