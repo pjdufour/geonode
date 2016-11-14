@@ -11,26 +11,14 @@
     geodash.initial_data =
     {
       "data": {
-        "dashboards_typeahead": {{ GEODASH_DASHBOARDS_TYPEAHEAD|safe }},
-        "endpoints": {{ endpoints_json|safe }}
+        "dashboards_typeahead": {{ GEODASH_DASHBOARDS_TYPEAHEAD|safe }}
       }
-    }
+    };
 </script>
 {% endblock %}
 
 {% block sidebar_left %}{% endblock %}
 {% block sidebar_right %}{% endblock %}
-
-{% block modals %}
-{{ block.super }}
-<div
-  class="geodash-controller"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="myModalLabel"
-  geodasheditor-modal-welcome>
-</div>
-{% endblock %}
 
 {% block extra_content %}{% endblock %}
 

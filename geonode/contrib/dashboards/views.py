@@ -79,7 +79,7 @@ def dashboards_browse(request, template="dashboards/browse.html"):
 
     ctx.update({
       "server_templates": json.dumps({
-          "main.tpl.html": get_template("sparc2/home/main.tpl.html").render(ctx)
+          "main.tpl.html": get_template("dashboards/_templates/home/main.tpl.html").render(ctx)
       })
     })
 

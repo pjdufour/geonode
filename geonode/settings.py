@@ -864,9 +864,6 @@ GEODASH_STATIC_DEPS = {
     "jqueryui": {
         "version": "1.11.4",
         "theme": "cupertino"
-    },
-    "select2": {
-        "version": "4.0.1"
     }
 }
 GEODASH_STATIC_DEBUG = {
@@ -876,7 +873,6 @@ GEODASH_STATIC_DEBUG = {
     "bootstrap": False,
     "jquery": False,
     "leaflet": True,
-    "select2": True,
     "monolith": True
 }
 #-----------------------------

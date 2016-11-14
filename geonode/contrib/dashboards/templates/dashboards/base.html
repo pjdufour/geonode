@@ -13,17 +13,13 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
     {% endblock %}
     <!-- CSS / External-->
-    <link href="{{ STATIC_URL}}geodash/lib/jquery-ui/{{ GEODASH_STATIC_DEPS.jqueryui.version }}/jquery-ui.min.css" rel="stylesheet"/>
-    <link href="{{ STATIC_URL}}geodash/lib/select2/select2-{{ GEODASH_STATIC_DEPS.select2.version }}/dist/css/select2.min.css" rel="stylesheet"/>
-    <link href="{{ STATIC_URL}}geodash/lib/select2-bootstrap-theme/dist/select2-bootstrap.min.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL}}dashboards/lib/jquery-ui/{{ GEODASH_STATIC_DEPS.jqueryui.version }}/jquery-ui.min.css" rel="stylesheet"/>
     {% block head_bootstrap_css %}
     <link href="{{ STATIC_URL }}geodash/build/bootstrap/bootstrap.css" rel="stylesheet"/>
     {% endblock %}
-    <link href="{{ STATIC_URL }}geodash/lib/typeahead.js-bootstrap-css/typeaheadjs.css" rel="stylesheet"/>
-    <link href="{{ STATIC_URL}}geodash/lib/c3/{{ GEODASH_STATIC_DEPS.c3.version }}/c3.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="{{ STATIC_URL}}geodash/lib/leaflet/1.0.0-b1/leaflet.css" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ STATIC_URL}}geodash/lib/Leaflet.label/leaflet-master/leaflet.label.css" type="text/css" media="all" />
-    <link href="{{ STATIC_URL}}geodash/lib/font-awesome/{{ GEODASH_STATIC_DEPS.fontawesome.version }}/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL }}dashboards/lib/typeahead.js-bootstrap-css/typeaheadjs.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL}}dashboards/lib/c3/{{ GEODASH_STATIC_DEPS.c3.version }}/c3.min.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL}}dashboards/lib/font-awesome/{{ GEODASH_STATIC_DEPS.fontawesome.version }}/css/font-awesome.min.css" rel="stylesheet"/>
     {% if GEODASH_STATIC_MONOLITH_CSS %}
     <!-- CSS / Monolith -->
     {% block head_monolith_css %}{% endblock %}
@@ -42,69 +38,57 @@
     {% else %}
     <!-- JavaScript / External -->
     {% if GEODASH_STATIC_DEBUG.jquery %}
-    <script src="{{ STATIC_URL}}geodash/lib/jquery/{{ GEODASH_STATIC_DEPS.jquery.version }}/jquery-{{ GEODASH_STATIC_DEPS.jquery.version }}.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/jquery-ui/{{ GEODASH_STATIC_DEPS.jqueryui.version }}/jquery-ui.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/jquery/{{ GEODASH_STATIC_DEPS.jquery.version }}/jquery-{{ GEODASH_STATIC_DEPS.jquery.version }}.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/jquery-ui/{{ GEODASH_STATIC_DEPS.jqueryui.version }}/jquery-ui.js"></script>
     {% else %}
-    <script src="{{ STATIC_URL}}geodash/lib/jquery/{{ GEODASH_STATIC_DEPS.jquery.version }}/jquery-{{ GEODASH_STATIC_DEPS.jquery.version }}.min.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/jquery-ui/{{ GEODASH_STATIC_DEPS.jqueryui.version }}/jquery-ui.min.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/jquery/{{ GEODASH_STATIC_DEPS.jquery.version }}/jquery-{{ GEODASH_STATIC_DEPS.jquery.version }}.min.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/jquery-ui/{{ GEODASH_STATIC_DEPS.jqueryui.version }}/jquery-ui.min.js"></script>
     {% endif %}
     {% if GEODASH_STATIC_DEBUG.yamljs %}
-    <script src="{{ STATIC_URL}}geodash/lib/yamljs/develop/dist/yaml.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/yamljs/develop/dist/yaml.js"></script>
     {% else %}
-    <script src="{{ STATIC_URL}}geodash/lib/yamljs/develop/dist/yaml.min.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/yamljs/develop/dist/yaml.min.js"></script>
     {% endif %}
-    {% if GEODASH_STATIC_DEBUG.select2 %}
-    <script src="{{ STATIC_URL}}geodash/lib/select2/select2-{{ GEODASH_STATIC_DEPS.select2.version }}/dist/js/select2.full.js"></script>
-    {% else %}
-    <script src="{{ STATIC_URL}}geodash/lib/select2/select2-{{ GEODASH_STATIC_DEPS.select2.version }}/dist/js/select2.full.min.js"></script>
-    {% endif %}
-    <script src="{{ STATIC_URL}}geodash/lib/typeahead/custom/typeahead-custom.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/typeahead/custom/typeahead-custom.js"></script>
     {% if GEODASH_STATIC_DEBUG.angular %}
-    <script src="{{ STATIC_URL}}geodash/lib/angularjs/{{ GEODASH_STATIC_DEPS.angular.version }}/angular.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/angularjs/{{ GEODASH_STATIC_DEPS.angular.version }}/angular-route.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/angularjs/{{ GEODASH_STATIC_DEPS.angular.version }}/angular-sanitize.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/angularjs/{{ GEODASH_STATIC_DEPS.angular.version }}/angular-cookies.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/angularjs/{{ GEODASH_STATIC_DEPS.angular.version }}/angular.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/angularjs/{{ GEODASH_STATIC_DEPS.angular.version }}/angular-route.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/angularjs/{{ GEODASH_STATIC_DEPS.angular.version }}/angular-sanitize.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/angularjs/{{ GEODASH_STATIC_DEPS.angular.version }}/angular-cookies.js"></script>
     {% else %}
-    <script src="{{ STATIC_URL}}geodash/lib/angularjs/{{ GEODASH_STATIC_DEPS.angular.version }}/angular.min.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/angularjs/{{ GEODASH_STATIC_DEPS.angular.version }}/angular-route.min.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/angularjs/{{ GEODASH_STATIC_DEPS.angular.version }}/angular-sanitize.min.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/angularjs/{{ GEODASH_STATIC_DEPS.angular.version }}/angular-cookies.min.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/angularjs/{{ GEODASH_STATIC_DEPS.angular.version }}/angular.min.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/angularjs/{{ GEODASH_STATIC_DEPS.angular.version }}/angular-route.min.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/angularjs/{{ GEODASH_STATIC_DEPS.angular.version }}/angular-sanitize.min.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/angularjs/{{ GEODASH_STATIC_DEPS.angular.version }}/angular-cookies.min.js"></script>
     {% endif %}
     {% if GEODASH_STATIC_DEBUG.bootstrap %}
-    <script src="{{ STATIC_URL}}geodash/lib/bootstrap/{{ GEODASH_STATIC_DEPS.bootstrap.version }}/dist/js/bootstrap.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/bootstrap/{{ GEODASH_STATIC_DEPS.bootstrap.version }}/dist/js/bootstrap.js"></script>
     {% else %}
-    <script src="{{ STATIC_URL}}geodash/lib/bootstrap/{{ GEODASH_STATIC_DEPS.bootstrap.version }}/dist/js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/bootstrap/{{ GEODASH_STATIC_DEPS.bootstrap.version }}/dist/js/bootstrap.min.js"></script>
     {% endif %}
     {% if GEODASH_STATIC_DEBUG.d3 %}
-    <script src="{{ STATIC_URL}}geodash/lib/d3/{{ GEODASH_STATIC_DEPS.d3.version }}/d3.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/d3/{{ GEODASH_STATIC_DEPS.d3.version }}/d3.js"></script>
     {% else %}
-    <script src="{{ STATIC_URL}}geodash/lib/d3/{{ GEODASH_STATIC_DEPS.d3.version }}/d3.min.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/d3/{{ GEODASH_STATIC_DEPS.d3.version }}/d3.min.js"></script>
     {% endif %}
     {% if GEODASH_STATIC_DEBUG.c3 %}
-    <script src="{{ STATIC_URL}}geodash/lib/c3/{{ GEODASH_STATIC_DEPS.c3.version }}/c3.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/c3/{{ GEODASH_STATIC_DEPS.c3.version }}/c3.js"></script>
     {% else %}
-    <script src="{{ STATIC_URL}}geodash/lib/c3/{{ GEODASH_STATIC_DEPS.c3.version }}/c3.min.js"></script>
-    {% endif %}
-    {% if GEODASH_STATIC_DEBUG.leaflet %}
-    <script src="{{ STATIC_URL}}geodash/lib/leaflet/1.0.0-b1/leaflet-src.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/Leaflet.utfgrid/dist/leaflet.utfgrid-src.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/Leaflet.heat/custom/wfp-simpleheat.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/Leaflet.heat/custom/wfp-heatcanvas.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/Leaflet.heat/custom/wfp-heatlayer.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/Leaflet.label/leaflet-master/leaflet.label-src.js"></script>
-    {% else %}
-    <script src="{{ STATIC_URL}}geodash/lib/leaflet/1.0.0-b1/leaflet.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/Leaflet.heat/custom/wfp-simpleheat.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/Leaflet.heat/custom/wfp-heatcanvas.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/Leaflet.heat/custom/wfp-heatlayer.js"></script>
-    <script src="{{ STATIC_URL}}geodash/lib/Leaflet.label/leaflet-master/leaflet.label.js"></script>
+    <script src="{{ STATIC_URL}}dashboards/lib/c3/{{ GEODASH_STATIC_DEPS.c3.version }}/c3.min.js"></script>
     {% endif %}
     <!-- JavaScript / Internal -->
     {% block head_main_js %}<!-- Should be overwritten by downstream projects -->{% endblock %}
     {% endif %}
 
     {% block head_inline %}
-    {% include "geodash/_includes/snippet_const.html" %}
+    <script type="text/javascript" language="Javascript">
+        var now = new Date();
+        var today = new Date(now.getFullYear(),now.getMonth(),now.getDate());
+        var months_short_3 = {{ MONTHS_SHORT3|safe }};
+        var months_long = {{ MONTHS_LONG|safe }};
+        var months_num = {{ MONTHS_NUM|safe }};
+        var daysoftheweek = {{ DAYSOFTHEWEEK|safe }};
+    </script>
     {% endblock %}
 
     {% block map_config %}
@@ -114,7 +98,7 @@
     {% endblock %}
 
     {% block extra_head %}{% endblock %}
-    
+
     {% block init %}{% endblock %}
   </head>
   <body>{% block content %}{% block extra_content %}{% endblock %}{% endblock %}</body>

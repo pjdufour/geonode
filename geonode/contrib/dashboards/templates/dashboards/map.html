@@ -29,12 +29,12 @@
 {% endblock %}
 
 {% block head_main_js %}
-<script src="{{ STATIC_URL }}geodash/lib/showdown/1.3.0/showdown.js?v={{ GEODASH_STATIC_VERSION }}"></script>
+<script src="{{ STATIC_URL }}dashboards/lib/showdown/1.3.0/showdown.js?v={{ GEODASH_STATIC_VERSION }}"></script>
 {% if GEODASH_STATIC_DEBUG.main %}
-<script src="{{ STATIC_URL }}dashboards/build/js/monkeypatch.js?v={{ GEODASH_STATIC_VERSION }}"></script>
+<!-- <script src="{{ STATIC_URL }}dashboards/build/js/monkeypatch.js?v={{ GEODASH_STATIC_VERSION }}"></script> -->
 <script src="{{ STATIC_URL }}dashboards/build/js/dashboards.js?v={{ GEODASH_STATIC_VERSION }}"></script>
 {% else %}
-<script src="{{ STATIC_URL }}dashboards/build/js/monkeypatch.min.js?v={{ GEODASH_STATIC_VERSION }}"></script>
+<!-- <script src="{{ STATIC_URL }}dashboards/build/js/monkeypatch.min.js?v={{ GEODASH_STATIC_VERSION }}"></script>  -->
 <script src="{{ STATIC_URL }}dashboards/build/js/dashboards.min.js?v={{ GEODASH_STATIC_VERSION }}"></script>
 {% endif %}
 {% endblock %}
@@ -48,7 +48,16 @@
 {% endblock %}
 
 {% block head_inline %}
-{% include "geodash/_includes/snippet_const.html" %}
+<script type="text/javascript" language="Javascript">
+    var now = new Date();
+    var today = new Date(now.getFullYear(),now.getMonth(),now.getDate());
+    {% comment %}
+    var months_short_3 = {{ MONTHS_SHORT3|safe }};
+    var months_long = {{ MONTHS_LONG|safe }};
+    var months_num = {{ MONTHS_NUM|safe }};
+    var daysoftheweek = {{ DAYSOFTHEWEEK|safe }};
+    {% endcomment %}
+</script>
 {% endblock %}
 
 {% block extra_head %}

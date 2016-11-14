@@ -407,7 +407,7 @@ gulp.task('geodash:api', ['clean'], function(cb){
 
   for(var i = 0; i < compile_endpoints.length; i++)
   {
-    var plugin_endpoints = require(geodash.expand.home(geodash.resolve.path(compile_endpoints[i],cwd)));
+    var plugin_endpoints = geodash.load.file(geodash.expand.home(geodash.resolve.path(compile_endpoints[i], cwd)));
     endpoints = merge(endpoints, plugin_endpoints);
   }
 

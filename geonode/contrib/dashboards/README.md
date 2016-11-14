@@ -18,6 +18,12 @@ python manage.py makemigrations geonode
 python manage.py migrate geonode
 ```
 
+Install gulp to global
+
+```
+sudo npm install gulp -g
+```
+
 ## Settings
 
 ### Activation
