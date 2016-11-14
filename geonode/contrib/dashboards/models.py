@@ -2,6 +2,7 @@ from django.db import models
 
 from geonode.base.models import ResourceBase
 from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 
 
@@ -27,7 +28,7 @@ from django.core.urlresolvers import reverse
 #        )
 
 
-class GeoDashDashboard(ResourceBase):
+class Dashboard(ResourceBase):
 
     """
     A dashboard is a customized view of map data.
@@ -39,6 +40,7 @@ class GeoDashDashboard(ResourceBase):
     resource = generic.GenericForeignKey('content_type', 'object_id')
 
     # Dashboard specific fields
+    slug = models.CharField(max_length=255, null=True, blank=True)
     config = models.TextField(null=True, blank=True)
     advertised = models.BooleanField()
     published = models.BooleanField()
@@ -65,10 +67,10 @@ class GeoDashDashboard(ResourceBase):
 
     class Meta(ResourceBase.Meta):
         ordering = ("title",)
-        verbose_name = ("GeoDash Dashboard")
-        verbose_name_plural = ("GeoDash Dashboards")
+        verbose_name = ("Dashboard")
+        verbose_name_plural = ("Dashboards")
         permissions = (
-            ('view_geodashdashboard', 'View GeoDash Dashboard'),
+            ('view_dashboard', 'View Dashboard'),
             # ('add_geodashdashboard', 'Add GeoDash Dashboard'),
             # ('change_geodashdashboard', 'Change GeoDash Dashboard'),
             # ('delete_geodashdashboard', 'Delete GeoDash Dashboard'),

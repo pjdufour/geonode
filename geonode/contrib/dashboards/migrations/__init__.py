@@ -17,28 +17,3 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 #########################################################################
-
-from django.contrib import admin
-from geonode.contrib.dashboards.models import Dashboard
-from geonode.base.admin import MediaTranslationAdmin, ResourceBaseAdminForm
-
-
-class DashboardAdminForm(ResourceBaseAdminForm):
-
-    class Meta:
-        model = Dashboard
-        fields = '__all__'
-        exclude = (
-            'resource',
-        )
-
-
-class DashboardAdmin(MediaTranslationAdmin):
-    list_display = ('id', 'title', 'slug', 'date', 'category')
-    list_display_links = ('id', 'title', )
-    list_filter = ('date', 'date_type', 'restriction_code_type', 'category')
-    search_fields = ('title', 'abstract', 'purpose',)
-    date_hierarchy = 'date'
-    form = DashboardAdminForm
-
-admin.site.register(Dashboard, DashboardAdmin)

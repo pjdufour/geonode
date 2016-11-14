@@ -28,7 +28,7 @@ from geodash.utils import build_state_schema, build_context, build_initial_state
 from geodash.security import check_perms_view, expand_perms, geodash_assign_default_perms
 from geodash.views import GeoDashDictWriter
 
-from geonode.contrib.dashboards.models import GeoDashDashboard
+from geonode.contrib.dashboards.models import Dashboard
 from geonode.contrib.dashboards.utils import expand_users
 
 SCHEMA_PATH = 'geonode/contrib/dashboards/static/dashboards/build/schema/schema.yml'
@@ -53,7 +53,7 @@ def dashboards_browse(request, template="dashboards/browse.html"):
 
     page = "browse"
     slug = "browse"
-    map_obj = get_object_or_404(GeoDashDashboard, slug=slug)
+    map_obj = get_object_or_404(Dashboard, slug=slug)
 
     config = yaml.load(map_obj.config)
     ctx = build_context(
@@ -88,7 +88,7 @@ def dashboards_browse(request, template="dashboards/browse.html"):
 
 def dashboard_page(request, slug=None, template="dashboards/dashboard.html"):
 
-    map_obj = get_object_or_404(GeoDashDashboard, slug=slug)
+    map_obj = get_object_or_404(Dashboard, slug=slug)
 
     check_perms_view(request, map_obj, raiseErrors=True)
 
@@ -117,7 +117,7 @@ def dashboard_page(request, slug=None, template="dashboards/dashboard.html"):
         "security_json": json.dumps(security),
         "security_schema": security_schema,
         "security_schema_json": json.dumps(security_schema),
-        "include_sidebar_right": request.user.has_perm("change_geodashdashboard", map_obj),
+        "include_sidebar_right": request.user.has_perm("change_dashboard", map_obj),
         "perms_json": json.dumps(get_perms(request.user, map_obj)),
         "users": json.dumps(expand_users(request, map_obj))
     })
@@ -152,7 +152,7 @@ def dashboard_page(request, slug=None, template="dashboards/dashboard.html"):
 
 
 def dashboard_config(request, slug=None, extension="json"):
-    map_obj = get_object_or_404(GeoDashDashboard, slug=slug)
+    map_obj = get_object_or_404(Dashboard, slug=slug)
     check_perms_view(request, map_obj, raiseErrors=True)
     return _build_response(request, build_dashboard_config(map_obj), extension)
 
@@ -160,7 +160,7 @@ def dashboard_state(request, extension="json"):
     return _build_response(request, {}, extension)
 
 def dashboard_security(request, slug=None, extension="json"):
-    map_obj = get_object_or_404(GeoDashDashboard, slug=slug)
+    map_obj = get_object_or_404(Dashboard, slug=slug)
     check_perms_view(request, map_obj, raiseErrors=True)
     return _build_response(request, expand_perms(map_obj), extension)
 
@@ -193,8 +193,8 @@ def dashboard_new(request):
 
     map_obj = None
     try:
-        map_obj = GeoDashDashboard.objects.get(slug=slug)
-    except GeoDashDashboard.DoesNotExist:
+        map_obj = Dashboard.objects.get(slug=slug)
+    except Dashboard.DoesNotExist:
         map_obj = None
 
     response_json = None
@@ -207,7 +207,7 @@ def dashboard_new(request):
     else:
         title = config.pop('title', None)
         security = content['security']
-        map_obj = GeoDashDashboard(
+        map_obj = Dashboard(
           slug=slug,
           title=title,
           config=yaml.dump(config),
@@ -240,11 +240,11 @@ def dashboard_save(request, slug=None):
     if request.method != 'POST':
         raise Http404("Can only use POST")
 
-    map_obj = get_object_or_404(GeoDashDashboard, slug=slug)
+    map_obj = get_object_or_404(Dashboard, slug=slug)
 
     response_json = None
 
-    if request.user.has_perm("change_geodashdashboard", map_obj):
+    if request.user.has_perm("change_dashboard", map_obj):
 
         print request.body
         content = json.loads(request.body)
@@ -258,12 +258,12 @@ def dashboard_save(request, slug=None):
         map_obj.save()
 
         perms = {
-            'view_geodashdashboard': security.get("view_geodashdashboard", []),
-            'change_geodashdashboard': security.get("change_geodashdashboard", []),
-            'delete_geodashdashboard': security.get("delete_geodashdashboard", [])
+            'view_dashboard': security.get("view_dashboard", []),
+            'change_dashboard': security.get("change_dashboard", []),
+            'delete_dashboard': security.get("delete_dashboard", [])
         }
         currentUsers = get_users_with_perms(map_obj)
-        for perm in ["view_geodashdashboard", "change_geodashdashboard", "delete_geodashdashboard"]:
+        for perm in ["view_dashboard", "change_dashboard", "delete_dashboard"]:
             # Remove Old Permissions
             for user in currentUsers:
                 username = user.username

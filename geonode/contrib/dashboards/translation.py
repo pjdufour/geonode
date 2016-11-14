@@ -18,27 +18,18 @@
 #
 #########################################################################
 
-from django.contrib import admin
+from modeltranslation.translator import translator, TranslationOptions
 from geonode.contrib.dashboards.models import Dashboard
-from geonode.base.admin import MediaTranslationAdmin, ResourceBaseAdminForm
 
 
-class DashboardAdminForm(ResourceBaseAdminForm):
+class DashboardTranslationOptions(TranslationOptions):
+    fields = (
+        'title',
+        'abstract',
+        'purpose',
+        'constraints_other',
+        'supplemental_information',
+        'data_quality_statement',
+    )
 
-    class Meta:
-        model = Dashboard
-        fields = '__all__'
-        exclude = (
-            'resource',
-        )
-
-
-class DashboardAdmin(MediaTranslationAdmin):
-    list_display = ('id', 'title', 'slug', 'date', 'category')
-    list_display_links = ('id', 'title', )
-    list_filter = ('date', 'date_type', 'restriction_code_type', 'category')
-    search_fields = ('title', 'abstract', 'purpose',)
-    date_hierarchy = 'date'
-    form = DashboardAdminForm
-
-admin.site.register(Dashboard, DashboardAdmin)
+translator.register(Dashboard, DashboardTranslationOptions)
