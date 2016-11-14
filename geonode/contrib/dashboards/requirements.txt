@@ -1,0 +1,10 @@
+bleach
+gunicorn
+httplib2
+markdown
+numpy
+psycopg2
+pymemcache
+pyyaml
+requests
+unidecode

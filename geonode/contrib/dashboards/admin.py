@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from guardian.admin import GuardedModelAdmin
 
-from geonode.contrib.geonode_geodash.models import GeoDashDashboard
+from geonode.contrib.dashboards.models import GeoDashDashboard
 
 class GeoDashDashboardAdmin(GuardedModelAdmin):
     model = GeoDashDashboard

@@ -111,9 +111,9 @@ if "geonode.contrib.dynamic" in settings.INSTALLED_APPS:
                             (r'^dynamic/', include('geonode.contrib.dynamic.urls')),
                             )
 
-if settings.GEODASH_ENABLED and "geonode.contrib.geonode_geodash" in settings.INSTALLED_APPS:
+if settings.GEODASH_ENABLED and "geonode.contrib.dashboards" in settings.INSTALLED_APPS:
     urlpatterns += patterns('',
-                            (r'^dashboards/', include('geonode.contrib.geonode_geodash.urls')),
+                            (r'^dashboards/', include('geonode.contrib.dashboards.urls')),
                             )
 
 if "geonode.contrib.metadataxsl" in settings.INSTALLED_APPS:

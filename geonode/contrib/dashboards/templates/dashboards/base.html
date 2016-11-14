@@ -106,14 +106,16 @@
     {% block head_inline %}
     {% include "geodash/_includes/snippet_const.html" %}
     {% endblock %}
-    {% block extra_head %}{% endblock %}
-    {% block init %}
-    <script type="text/javascript" language="Javascript">
-        $(function(){
-            init_main_app("mainApp","");
-        });
+
+    {% block map_config %}
+    <script>
+      geodash.mapping_library = "{{ GEODASH_MAPPING_LIBRARY }}";
     </script>
     {% endblock %}
+
+    {% block extra_head %}{% endblock %}
+    
+    {% block init %}{% endblock %}
   </head>
   <body>{% block content %}{% block extra_content %}{% endblock %}{% endblock %}</body>
 </html>

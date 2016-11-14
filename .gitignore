@@ -87,4 +87,4 @@ development.db
 master
 slave
 
-geonode/contrib/geonode_geodash/static/geonode_geodash/src/geodash/.cache/
+geonode/contrib/dashboards/static/dashboards/src/geodash/.cache/

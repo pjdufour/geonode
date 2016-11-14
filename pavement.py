@@ -134,11 +134,11 @@ def static(options):
 
 @task
 def geodash(options):
-    with pushd('geonode/contrib/geonode_geodash/static/geonode_geodash'):
+    with pushd('geonode/contrib/dashboards/static/dashboards'):
         sh('gulp')
 
 def geodash_bootstrap(options):
-    with pushd('geonode/contrib/geonode_geodash/static/geonode_geodash'):
+    with pushd('geonode/contrib/dashboards/static/dashboards'):
         sh('gulp bootstrap:compile')
 
 @task

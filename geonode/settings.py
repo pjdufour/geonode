@@ -269,8 +269,8 @@ GEONODE_CONTRIB_APPS = (
 
 # Uncomment the following line to enable contrib apps
 # GEONODE_APPS = GEONODE_APPS + GEONODE_CONTRIB_APPS
-#GEONODE_APPS = GEONODE_APPS + ('geodashserver', 'geonode.contrib.geonode_geodash',)
-GEONODE_APPS = GEONODE_APPS + ('geodash', 'geonode.contrib.geonode_geodash',)
+#GEONODE_APPS = GEONODE_APPS + ('geodashserver', 'geonode.contrib.dashboards',)
+GEONODE_APPS = GEONODE_APPS + ('geodash', 'geonode.contrib.dashboards',)
 
 INSTALLED_APPS = (
 
@@ -392,8 +392,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     # and GEOSERVER_BASE_URL to all pages that use a RequestContext
     'geonode.context_processors.resource_urls',
     'geonode.geoserver.context_processors.geoserver_urls',
-    'geodash.context_processors.geodash',
-    'geonode.contrib.geonode_geodash.context_processors.geonode_geodash',
+    #'geodash.context_processors.geodash',
+    'geonode.contrib.dashboards.context_processors.dashboards',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -819,8 +819,68 @@ RESOURCE_PUBLISHING = False
 # Settings for EXIF contrib app
 EXIF_ENABLED = False
 
+#######################################
 # Settings for GeoDash contrib app
 GEODASH_ENABLED = True
+#-----------------------------
+# Mapping Library
+GEODASH_MAPPING_LIBRARY = "ol3"
+#-----------------------------
+# Database
+GEODASH_DB_CONN_STR = "dbname='geodash' user='geodash' host='localhost' password='geodash'"
+GEODASH_CACHE_DATA = True
+GEODASH_MEMCACHED_HOST = 'localhost'
+GEODASH_MEMCACHED_PORT = 11212  # So doesn't interfer with root/built-in memcached
+#-----------------------------
+# DNS Prefetch
+GEODASH_DNS_PREFETCH = [
+    '//wfp.org',
+    '//mapbox.com', '//api.mapbox.com',
+    '//thunderforest.com',
+    '//openstreetmap.org', '//openstreetmap.fr'
+]
+#-----------------------------
+# Static Management
+GEODASH_STATIC_MONOLITH_CSS = False
+GEODASH_STATIC_MONOLITH_JS = True
+SPARC_STATIC_VERSION = "0.0.1"
+GEODASH_STATIC_VERSION = "0.0.1"
+GEODASH_STATIC_DEPS = {
+    "angular": {
+        "version": "1.4.0-beta.4"
+    },
+    "c3": {
+        "version": "0.4.10"
+    },
+    "d3": {
+        "version": "3.5.14"
+    },
+    "fontawesome": {
+        "version": "4.5.0"
+    },
+    "jquery": {
+        "version": "1.9.1"
+    },
+    "jqueryui": {
+        "version": "1.11.4",
+        "theme": "cupertino"
+    },
+    "select2": {
+        "version": "4.0.1"
+    }
+}
+GEODASH_STATIC_DEBUG = {
+    "angular": True,
+    "c3": False,
+    "d3": False,
+    "bootstrap": False,
+    "jquery": False,
+    "leaflet": True,
+    "select2": True,
+    "monolith": True
+}
+#-----------------------------
+
 
 # Settings for NLP contrib app
 NLP_ENABLED = False
@@ -934,16 +994,6 @@ try:
     from local_settings import *  # noqa
 except ImportError:
     pass
-
-# Load additonal settings for GeoDash, see geonode/contrib/api_basemap/README.md
-print 'GEODASH_ENABLED:', GEODASH_ENABLED
-if GEODASH_ENABLED:
-    print "Trying to import GeoDash Settings."
-    try:
-        from geonode.contrib.geonode_geodash import *
-    except ImportError:
-        pass
-
 
 # Load additonal basemaps, see geonode/contrib/api_basemap/README.md
 try:

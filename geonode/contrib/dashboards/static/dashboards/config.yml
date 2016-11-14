@@ -1,12 +1,12 @@
 ---
-name: geonodegeodash
+name: dashboards
 version: "0.0.1"
 description: "GeoNode GeoDash Contrib App 1.x"
 path:
   geodash: "./src/geodash"
 less:
   pre:
-    - "./src/geodash/global/geonodegeodash.less"
+    - "./src/geodash/global/dashboards.less"
   paths:
     - "./src/geodash/global"
   outfile: "main.css"
@@ -16,16 +16,17 @@ bootstrap:
   variables: "./src/less/bootstrap/variables.less"
   dest: "./build/bootstrap"
 plugins:
-  #- https://github.com/geodashio/geodash-plugin-map-map.git
-  #- https://github.com/geodashio/geodash-plugin-editor-welcome
-  #- https://github.com/geodashio/geodash-plugin-editor-sidebar
-  #- https://github.com/geodashio/geodash-plugin-main.git
+  # For Production
+  - { branch: master, url: https://github.com/geodashio/geodash-plugin-map-map.git }
+  - { branch: master, url: https://github.com/geodashio/geodash-plugin-editor-welcome.git }
+  - { branch: master, url: https://github.com/geodashio/geodash-plugin-editor-sidebar.git }
+  - { branch: master, url: https://github.com/geodashio/geodash-plugin-main.git }
   # For development, you can point to local copies
-  - file:///home/vagrant/geodash-plugin-map-map.git
-  - file:///home/vagrant/geodash-plugin-editor-welcome.git
-  - file:///home/vagrant/geodash-plugin-editor-sidebar.git
-  - file:///home/vagrant/geodash-plugin-main.git
-  - geonodegeodash
+  #- file:///home/vagrant/geodash-plugin-map-map.git
+  #- file:///home/vagrant/geodash-plugin-editor-welcome.git
+  #- file:///home/vagrant/geodash-plugin-editor-sidebar.git
+  #- file:///home/vagrant/geodash-plugin-main.git
+  - dashboards
 dependencies:
   production:
     javascript:
@@ -43,8 +44,8 @@ dependencies:
 compiler:
   list: []
 resources:
-  - name: geonodegeodash.less
-    path: ./src/geodash/global/geonodegeodash.less
+  - name: dashboards.less
+    path: ./src/geodash/global/dashboards.less
   - name: bootstrap.css
     path: ./build/bootstrap/bootstrap.css
   - name: polyfill.min.js
@@ -55,11 +56,11 @@ build:
     type: less
     src:
       - type: resource
-        project: geonodegeodash
-        name: geonodegeodash.less
+        project: dashboards
+        name: dashboards.less
       - type: var
         name: compile_less  # GeoDash will concat array variables
-    outfile: geonodegeodash.css
+    outfile: dashboards.css
     dest: ./build/css/
     paths: ./src/geodash/global
   monolith.css:
@@ -76,7 +77,7 @@ build:
         project: geodash
         name: select2-bootstrap.min.css
       - type: resource
-        project: geonodegeodash
+        project: dashboards
         name: bootstrap.css
       - type: resource
         project: geodash
@@ -92,7 +93,7 @@ build:
         name: font-awesome.min.css
       - type: build
         name: main.css
-    outfile: geonodegeodash.full.css
+    outfile: dashboards.full.css
     dest: ./build/css/
   polyfill.js:
     name: polyfill.js
@@ -108,7 +109,7 @@ build:
     src:
       - type: variable
         name: compile_js  # GeoDash will concat array variables
-    outfile: geonodegeodash.js
+    outfile: dashboards.js
     dest: ./build/js/
   monkeypatch.js:
     name: monkeypatch.js
@@ -171,5 +172,5 @@ build:
         name: monkeypatch.js
       - type: build
         name: main.js
-    outfile: geonodegeodash.full.js
+    outfile: dashboards.full.js
     dest: ./build/js/

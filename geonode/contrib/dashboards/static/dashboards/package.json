@@ -1,8 +1,8 @@
 {
-  "name": "geonodegeodash-static",
+  "name": "geonode-dashboards",
   "version": "0.0.1",
-  "author": "GeoDash Developers",
-  "description": "Static code and assets for GeoNode GeoDash Contrib App 1.x",
+  "author": "GeoNode Developers",
+  "description": "Static code and assets for GeoNode Dashboards",
   "contributors": [
     {
       "name": "Patrick Dufour"
@@ -13,26 +13,25 @@
   },
   "license": "BSD",
   "private": "false",
+  "dependencies": {
+  },
   "devDependencies": {
     "del": "*",
-    "expand-home-dir": "*",
+    "jshint": "*",
+    "geodash-build-pipeline": "*",
     "gulp": "^3.9.0",
     "gulp-angular-templatecache": "^1.8.0",
     "gulp-concat": "*",
-    "gulp-expect-file": "0.0.7",
     "gulp-jshint": "*",
     "gulp-less": "*",
     "gulp-minify": "*",
     "gulp-rename": "*",
     "gulp-uglify": "*",
     "gulp-util": "*",
-    "jshint": "*",
     "merge": "*",
+    "mkdirp": "*",
     "path": "*",
     "yamljs": "^0.2.7",
-    "yargs": "*",
-    "git-clone": "*",
-    "sync": "*",
-    "mkdirp": "*"
+    "yargs": "*"
   }
 }

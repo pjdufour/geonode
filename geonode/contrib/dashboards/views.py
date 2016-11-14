@@ -26,14 +26,28 @@ from geonode.people.models import Profile
 from geodash.cache import provision_memcached_client
 from geodash.utils import build_state_schema, build_context, build_initial_state, build_editor_config, build_dashboard_config
 from geodash.security import check_perms_view, expand_perms, geodash_assign_default_perms
+from geodash.views import GeoDashDictWriter
 
-from geonode.contrib.geonode_geodash.models import GeoDashDashboard
-from geonode.contrib.geonode_geodash.utils import expand_users
+from geonode.contrib.dashboards.models import GeoDashDashboard
+from geonode.contrib.dashboards.utils import expand_users
 
-SCHEMA_PATH = 'geonode/contrib/geonode_geodash/static/geonode_geodash/build/schema/schema.yml'
-ENDPOINTS_PATH = 'geonode/contrib/geonode_geodash/static/geonode_geodash/build/api/endpoints.yml'
+SCHEMA_PATH = 'geonode/contrib/dashboards/static/dashboards/build/schema/schema.yml'
+ENDPOINTS_PATH = 'geonode/contrib/dashboards/static/dashboards/build/api/endpoints.yml'
 
-def geonode_geodash_browse(request, template="geonode_geodash/browse.html"):
+
+def _build_response(request, data, extension):
+
+    ext_lc = extension.lower();
+    if ext_lc == "json":
+        return HttpResponse(json.dumps(data), content_type="application/json")
+    elif ext_lc == "yml" or ext_lc == "yaml":
+        response = yaml.safe_dump(data, encoding="utf-8", allow_unicode=True, default_flow_style=False)
+        return HttpResponse(response, content_type="text/plain")
+    else:
+        raise Http404("Unknown config format.")
+
+
+def dashboards_browse(request, template="dashboards/browse.html"):
     now = datetime.datetime.now()
     current_month = now.month
 
@@ -46,24 +60,40 @@ def geonode_geodash_browse(request, template="geonode_geodash/browse.html"):
         config,
         build_initial_state(config, page=page, slug=slug),
         build_state_schema())
-    ctx["include_sidebar_right"] = False
+
+    dashboard_resources = [{ "url": "/api/endpoints.json" }];
+
+    ctx = {
+        "dashboard_url": "/api/dashboard/browse.json",
+        "state_url": "/api/state/browse.json",
+        "state_schema_ul": "/api/schema/state.json",
+        "geodash_main_id": "geodash-main",
+        "include_sidebar_left": False,
+        "include_sidebar_left": False,
+        "modal_welcome": True
+    }
+
+    ctx.update({
+      "dashboard_resources_json": json.dumps(dashboard_resources)
+    })
+
+    ctx.update({
+      "server_templates": json.dumps({
+          "main.tpl.html": get_template("sparc2/home/main.tpl.html").render(ctx)
+      })
+    })
 
     return render_to_response(template, RequestContext(request, ctx))
 
 
-def geonode_geodash_dashboard(request, slug=None, template="geonode_geodash/dashboard.html"):
+def dashboard_page(request, slug=None, template="dashboards/dashboard.html"):
 
     map_obj = get_object_or_404(GeoDashDashboard, slug=slug)
 
     check_perms_view(request, map_obj, raiseErrors=True)
 
-    #pages = {}
-    #for gm in GeoDashDashboard.objects.all():
-#        pages[gm.slug] = reverse('geonode_geodash_dashboard', kwargs={'slug':gm.slug})
-
     config = build_dashboard_config(map_obj)
     config_schema = yaml.load(file(SCHEMA_PATH,'r'))
-    endpoints = yaml.load(file(ENDPOINTS_PATH,'r'))
 
     editor_template = "geodash/editor/editor.yml"
     editor_yml = get_template(editor_template).render({})
@@ -83,8 +113,6 @@ def geonode_geodash_dashboard(request, slug=None, template="geonode_geodash/dash
         "map_config_schema_json": json.dumps(config_schema),
         "editor": editor,
         "editor_json": json.dumps(editor),
-        "endpoints": endpoints,
-        "endpoints_json": json.dumps(endpoints),
         "security": security,
         "security_json": json.dumps(security),
         "security_schema": security_schema,
@@ -94,45 +122,61 @@ def geonode_geodash_dashboard(request, slug=None, template="geonode_geodash/dash
         "users": json.dumps(expand_users(request, map_obj))
     })
 
+    dashboard_resources = [
+        { "url": "/api/endpoints.json" },
+        { "name": "editor_schema", "url": reverse("dashboard_schema", kwargs={name: "editor", extension: "json"})},
+        { "name": "security_schema", "url": reverse("dashboard_schema", kwargs={name: "security", extension: "json"})}
+    ];
+
+    ctx = {
+        "dashboard_url": reverse("dashboard_config", kwargs={slug: slug, extension: extension}),
+        "state_url": reverse("dashboard_state", kwargs={slug: slug, extension: extension}),
+        "state_schema_url": reverse("dashboard_schema_state"),
+        "geodash_main_id": "geodash-main",
+        "include_sidebar_left": False,
+        "include_sidebar_left": False,
+        "modal_welcome": True
+    }
+
+    ctx.update({
+      "dashboard_resources_json": json.dumps(dashboard_resources)
+    })
+
+    ctx.update({
+      "server_templates": json.dumps({
+          "main.tpl.html": get_template("dashboards/main.tpl.html").render(ctx)
+      })
+    })
+
     return render_to_response(template, RequestContext(request, ctx))
 
 
-def geonode_geodash_dashboard_config(request, slug=None, extension="json"):
-
+def dashboard_config(request, slug=None, extension="json"):
     map_obj = get_object_or_404(GeoDashDashboard, slug=slug)
     check_perms_view(request, map_obj, raiseErrors=True)
-    map_config = build_dashboard_config(map_obj)
+    return _build_response(request, build_dashboard_config(map_obj), extension)
 
-    ext_lc = extension.lower();
-    if ext_lc == "json":
-        return HttpResponse(json.dumps(map_config), content_type="application/json")
-    elif ext_lc == "yml" or ext_lc == "yaml":
-        response = yaml.safe_dump(map_config, encoding="utf-8", allow_unicode=True, default_flow_style=False)
-        return HttpResponse(response, content_type="application/json")
-    else:
-        raise Http404("Unknown config format.")
+def dashboard_state(request, extension="json"):
+    return _build_response(request, {}, extension)
 
-def geonode_geodash_dashboard_security(request, slug=None, extension="json"):
-
+def dashboard_security(request, slug=None, extension="json"):
     map_obj = get_object_or_404(GeoDashDashboard, slug=slug)
     check_perms_view(request, map_obj, raiseErrors=True)
-    security = expand_perms(map_obj)
-
-    ext_lc = extension.lower();
-    if ext_lc == "json":
-        return HttpResponse(json.dumps(security), content_type="application/json")
-    elif ext_lc == "yml" or ext_lc == "yaml":
-        response = yaml.safe_dump(security, encoding="utf-8", allow_unicode=True, default_flow_style=False)
-        return HttpResponse(response, content_type="application/json")
-    else:
-        raise Http404("Unknown config format.")
-
-def geonode_geodash_map_schema(request):
-    map_config_schema = yaml.load(file(SCHEMA_PATH,'r'))
-    return HttpResponse(json.dumps(map_config_schema), content_type="application/json")
+    return _build_response(request, expand_perms(map_obj), extension)
 
 
-def geonode_geodash_dashboard_config_new(request):
+def dashboard_schema(request, name=None, extension="json"):
+    if name == "config":
+        return _build_response(request, yaml.load(file(SCHEMA_PATH,'r')), extension)
+    elif name == "state":
+        return _build_response(request, {}, extension)
+    elif name == "security":
+        return yaml.load(get_template("geodash/security/security.yml").render({}))
+
+def dashboard_endpoints(request, extension="json"):
+    return _build_response(request, yaml.load(file(ENDPOINTS_PATH,'r')), extension)
+
+def dashboard_new(request):
 
     if not request.user.is_authenticated():
         raise Http404("Not authenticated.")
@@ -185,7 +229,7 @@ def geonode_geodash_dashboard_config_new(request):
     return HttpResponse(json.dumps(response_json), content_type="application/json")
 
 
-def geonode_geodash_dashboard_config_save(request, slug=None):
+def dashboard_save(request, slug=None):
 
     if not request.user.is_authenticated():
         raise Http404("Not authenticated.")
