@@ -1,0 +1,39 @@
+---
+advertised:
+  type: boolean
+  label: Advertised
+  description: The layer is advertised through the web UI and API.
+published:
+  type: boolean
+  label: Published
+  description: The layer is published ("can be viewed by anonymous users" or "the public").
+view_dashboard:
+  type: stringarray
+  label: Can View
+  placeholder: Can View
+  required: true
+  description: "The users who can view the dashboard."
+  search:
+    output: id
+    templates: { suggestion: default }
+    datasets: GeoNodeProfiles
+change_dashboard:
+  type: stringarray
+  label: Can Edit
+  placeholder: Can Edit
+  required: true
+  description: "The users who can edit the dashboard."
+  search:
+    output: id
+    templates: { suggestion: default }
+    datasets: GeoNodeProfiles
+delete_dashboard:
+  type: stringarray
+  label: Can Delete
+  placeholder: Can Delete
+  required: true
+  description: "The users who can delete the dashboard."
+  search:
+    output: id
+    templates: { suggestion: default }
+    datasets: GeoNodeProfiles

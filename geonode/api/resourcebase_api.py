@@ -39,6 +39,8 @@ from tastypie.utils.mime import build_content_type
 from geonode.layers.models import Layer
 from geonode.maps.models import Map
 from geonode.documents.models import Document
+if getattr(settings, "GEODASH_ENABLED", False) and "geonode.contrib.dashboards" in settings.INSTALLED_APPS:
+    from geonode.contrib.dashboards.models import Dashboard
 from geonode.base.models import ResourceBase
 
 from .authorization import GeoNodeAuthorization
@@ -551,3 +553,17 @@ class DocumentResource(CommonModelApi):
         if settings.RESOURCE_PUBLISHING:
             queryset = queryset.filter(is_published=True)
         resource_name = 'documents'
+
+
+if getattr(settings, "GEODASH_ENABLED", False) and "geonode.contrib.dashboards" in settings.INSTALLED_APPS:
+    class DashboardResource(CommonModelApi):
+
+        """Dashboards API"""
+
+        class Meta(CommonMetaApi):
+            filtering = CommonMetaApi.filtering
+            filtering.update({'doc_type': ALL})
+            queryset = Dashboard.objects.distinct().order_by('-date')
+            if settings.RESOURCE_PUBLISHING:
+                queryset = queryset.filter(is_published=True)
+            resource_name = 'dashboards'

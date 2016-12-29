@@ -17,6 +17,8 @@
   {% endif %}
   {% if preview == 'OL3' %}
     {% include "maps/map_ol3.html" %}
+  {% elif preview == 'geodash' %}
+    {% include "maps/map_geodash_map.html" %}
   {% else %}
     {% include "maps/map_include.html" %}
   {% endif %}
@@ -36,7 +38,21 @@
     <div class="col-md-8">
 
       <div id="embedded_map">
+        {% if preview == 'geodash' %}
+        <div
+          id="geodash-main"
+          data-geodash-dashboard-name="main"
+          data-geodash-controllers="GeoDashControllerMain"
+          {% if dashboard_url %}data-geodash-dashboard-config-url="{{ dashboard_url }}"{% endif %}
+          {% if state_url %}data-geodash-dashboard-initial-state-url="{{ state_url }}"{% endif %}
+          {% if state_schema_url %}data-geodash-dashboard-state-schema-url="{{ state_schema_url }}"{% endif %}
+          {% if dashboard_resources_json %}data-geodash-dashboard-resources="{{ dashboard_resources_json }}"{% endif %}
+          class="geodash-dashboard"
+          geodash-main>
+        </div>
+        {% else %}
         <div id="the_map"></div>
+        {% endif %}
       </div>
 
       <div class="map-actions">
@@ -81,7 +97,7 @@
            <a href="{% url "map_metadata_detail" resource.id %}">
                <button class="btn btn-primary btn-md btn-block" >{% trans "Metadata Detail" %}</button>
            </a>
-        </li>  
+        </li>
 
         <div class="modal fade" id="download-map" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -176,7 +192,7 @@
           <h4>{% trans "Documents related to this map" %}</h4>
           <p>{% trans "List of documents related to this map:" %}</p>
           <ul class="list-unstyled">
-            {% for document in documents %} 
+            {% for document in documents %}
             <li><a href="{{ document.get_absolute_url }}">{{ document.title }}</a></li>
             {% endfor %}
           </ul>
@@ -214,9 +230,9 @@
         {% endif %}
 
         {% include "base/_resourcebase_contact_snippet.html" %}
-    
+
       </ul>
-      
+
     </div>
 
   </div>
@@ -297,13 +313,13 @@
       data: $("#form_post_comment").serialize(),
       success: function() {
         $('#form_post_comment_div').modal('hide');
-        $('#comments_section').load(window.location.pathname + ' #comments_section', 
+        $('#comments_section').load(window.location.pathname + ' #comments_section',
         		function(){$(this).children().unwrap()})
       }
     });
     return false;
   });
- 
+
 </script>
 {% include "_permissions_form_js.html" %}
 <script type="text/javascript" src="{{ STATIC_URL}}geonode/js/utils/thumbnail.js"></script>
@@ -313,5 +329,5 @@
     $('#edit-map').modal('toggle');
   });
 </script>
- 
+
 {% endblock %}

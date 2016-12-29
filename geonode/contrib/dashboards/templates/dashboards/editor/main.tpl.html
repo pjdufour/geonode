@@ -1,0 +1,26 @@
+<div class="row geodash-row geodash-main geodash-controller">
+  <div
+    id="geodash-map"
+    class="row geodash-row geodash-map geodash-controller sidebar-open sidebar-right-open"
+    dashboards-map>
+    <div data-geodash-controllers="GeoDashControllerOverlays" geodash-map-overlays></div>
+    <div data-geodash-controllers="GeoDashControllerNavbars" geodash-map-navbars></div>
+    <div data-geodash-controllers="GeoDashControllerLegend" geodash-map-legend></div>
+    <div id="map" data-geodash-controllers="GeoDashControllerMapMap" geodash-map-map></div>
+    <div id="geodash-popups" style="display:none;">
+    <div id="popup"></div>
+    </div>
+  </div>
+  <div
+    class="sidebar-open sidebar-right-open"
+    data-geodash-controllers="DashboardsControllerSidebarEditor" dashboards-sidebar-editor>
+  </div>
+  <div id="geodash-modals" class="geodash-modals">
+    <div data-geodash-controllers="DashboardsControllerModalFramework" dashboards-modal-framework></div>
+    <div data-geodash-controllers="DashboardsControllerModalConfig" dashboards-modal-config></div>
+    <div data-geodash-controllers="DashboardsControllerModalSecurity" dashboards-modal-security></div>
+    <div data-geodash-controllers="DashboardsControllerModalEditField" dashboards-modal-edit-field></div>
+    <div data-geodash-controllers="DashboardsControllerModalEditObject" dashboards-modal-edit-object></div>
+    <div data-geodash-controllers="DashboardsControllerModalSearchObject" dashboards-modal-search-object></div>
+  </div>
+</div>

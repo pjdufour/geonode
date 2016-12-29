@@ -10,7 +10,7 @@
 @screen-md-max: (@screen-lg-min - 1);
 
 @wfp-blue: #0088FF;
-@dashboards-font-family-primary: 'Open Sans', sans-serif;
+@geodashserver-font-family-primary: 'Open Sans', sans-serif;
 
 @geodash-header-height: 61px;
 
@@ -36,24 +36,21 @@
 @geodash-map-control-z-index: 9999; /* 4 x 9s */
 
 /* Welcome */
-@geodasheditor-welcome-body-font-family: @dashboards-font-family-primary;
-@geodasheditor-welcome-body-font-size: 14px;
-@geodasheditor-welcome-body-font-size-h3: 18px;
+@dashboards-welcome-body-font-family: @geodashserver-font-family-primary;
+@dashboards-welcome-body-font-size: 14px;
+@dashboards-welcome-body-font-size-h3: 18px;
 
-@geodasheditor-welcome-select-font-family: @dashboards-font-family-primary;
-@geodasheditor-welcome-select-foreground: white;
-@geodasheditor-welcome-select-background: @wfp-blue;
-@geodasheditor-welcome-select-dropdown-height: 56px;
-@geodasheditor-welcome-select-dropdown-font-size: 20px;
-@geodasheditor-welcome-select-dropdown-z-index: @geodash-modal-select-dropdown-z-index;
+@dashboards-welcome-select-font-family: @geodashserver-font-family-primary;
+@dashboards-welcome-select-foreground: white;
+@dashboards-welcome-select-background: @wfp-blue;
+@dashboards-welcome-select-dropdown-height: 56px;
+@dashboards-welcome-select-dropdown-font-size: 20px;
+@dashboards-welcome-select-dropdown-z-index: @geodash-modal-select-dropdown-z-index;
 
 /* Breadcrumbs */
 
 /* Overlays */
 @geodash-overlay-z-index: @geodash-map-control-z-index;
-
-/* Navbars */
-@geodash-map-navbar-transition: 1.2s;
 
 /* Legend */
 @geodash-map-legend-bottom: 4px;
@@ -76,3 +73,8 @@
 @geodash-sidebar-right-width: @geodash-sidebar-width;
 @geodash-sidebar-transition: 1.2s;
 @geodash-map-sidebar-toggle-z-index: @geodash-map-control-z-index;
+
+/* Navbars */
+@geodash-map-navbar-transition: 1.2s;
+@geodash-map-navbar-button-color: white;
+@geodash-map-navbar-button-background: rgba(0, 0, 0, 0.4);

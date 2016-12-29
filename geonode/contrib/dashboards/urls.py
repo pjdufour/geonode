@@ -30,44 +30,54 @@ urlpatterns = [
         name='dashboards_browse'),
 
     url(
-        r'^dashboard/(?P<slug>[^/]+)$',
-        views.dashboard_page,
-        name='dashboard_page'),
+        r'^new/(?P<type>[^/]+)/(?P<uuid>[^/]+)?$',
+        views.dashboards_new,
+        name='dashboards_new'),
+
+    url(
+        r'^(?P<uuid>[^/]+)$',
+        views.dashboards_page,
+        name='dashboards_page'),
 
     url(
         r'^api/endpoints[.](?P<extension>[^.]+)$',
-        views.dashboard_endpoints,
-        name='dashboard_endpoints'),
+        views.dashboards_api_endpoints,
+        name='dashboards_api_endpoints'),
+
+    url(
+        r'^api/pages[.](?P<extension>[^.]+)$',
+        views.dashboards_api_pages,
+        name='dashboards_api_pages'),
 
     url(
         r'^api/schema/(?P<name>[^/]+)[.](?P<extension>[^.]+)$',
-        views.dashboard_schema,
-        name='dashboard_schema'),
+        views.dashboards_api_schema,
+        name='dashboards_api_schema'),
 
     url(
-        r'^api/config/(?P<slug>[^/]+)[.](?P<extension>[^.]+)$',
-        views.dashboard_config,
-        name='dashboard_config'),
+        r'^api/(?P<type>[^/]+)/(?P<uuid>[^/]+)/config[.](?P<extension>[^.]+)$',
+        views.dashboards_api_config,
+        name='dashboards_api_config'),
 
     url(
-        r'^api/state/(?P<slug>[^/]+)[.](?P<extension>[^.]+)$',
-        views.dashboard_state,
-        name='dashboard_state'),
+        r'^api/(?P<type>[^/]+)/(?P<uuid>[^/]+)/state[.](?P<extension>[^.]+)$',
+        views.dashboards_api_state,
+        name='dashboards_api_state'),
 
     url(
-        r'^api/security/(?P<slug>[^/]+)[.](?P<extension>[^.]+)$',
-        views.dashboard_security,
-        name='dashboard_security'),
+        r'^api/(?P<type>[^/]+)/(?P<uuid>[^/]+)/security[.](?P<extension>[^.]+)$',
+        views.dashboards_api_security,
+        name='dashboards_api_security'),
 
 
     url(
-        r'^api/new$',
-        views.dashboard_new,
-        name='dashboard_new'),
+        r'^api/(?P<type>[^/]+)/new[.](?P<extension>[^.]+)$',
+        views.dashboards_api_new,
+        name='dashboards_api_new'),
 
     url(
-        r'^api/save/(?P<slug>[^/]+)$',
-        views.dashboard_save,
-        name='dashboard_save'),
+        r'^api/(?P<type>[^/]+)/(?P<uuid>[^/]+)/save[.](?P<extension>[^.]+)$',
+        views.dashboards_api_save,
+        name='dashboards_api_save'),
 
 ]

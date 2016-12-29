@@ -1,0 +1,134 @@
+---
+title: {{ layer.title }}
+view:
+  baselayer: osm
+  featurelayers: []
+  latitude: {{ latitude }}
+  longitude:  {{ longitude }}
+  maxZoom: 18
+  minZoom: 0
+  zoom: {{ zoom }}
+  controls: []
+controls:
+  attribution: false
+  legend: false
+  zoom: false
+renderlayers:
+  - osm
+baselayers: [] # overwritten by python
+featurelayers: []  # overwritten by python
+overlays: []
+legend:
+  title: Legend
+  position:
+    bottom: 80px
+    left: auto
+    right: 8px
+    top: auto
+  width: 200px
+  height: auto
+  grid: ["col-sm-4", "col-sm-8"]
+  css:
+    properties:
+    - name: padding
+      value: 8px
+    - name: background
+      value: '#EEE'
+    - name: border
+      value: '2px solid #0374e6'
+    - name: border-radius
+      value: 8px
+    - name: line-height
+      value: 20px
+    - name: color
+      value: black
+navbars:
+  - id: toolbar
+    placement: top
+    css:
+      properties:
+        - { name: left, value: 0px }
+        - { name: right, value: 0px }
+        - { name: height, value: 20px }
+    tabs:
+      - title: ""
+        value: "Print Map"
+        tooltip: { placement: bottom, content: "Print Map" }
+        css:
+          properties:
+            - { name: font-size, value: 2rem }
+            - { name: font-family, value: Verdana }
+        intents:
+          - name: printMap
+      - title: ""
+        value: "Zoom In"
+        tooltip: { placement: bottom, content: "Zoom in" }
+        css:
+          properties:
+            - { name: font-size, value: 2rem }
+            - { name: font-family, value: Verdana }
+        intents:
+          - name: zoomIn
+      - title: ""
+        value: "Zoom Out"
+        tooltip: { placement: bottom, content: "Zoom out" }
+        css:
+          properties:
+            - { name: font-size, value: 2rem }
+            - { name: font-family, value: Verdana }
+        intents:
+          - name: zoomOut
+      - title: ""
+        value: "Previous Extent"
+        tooltip: { placement: bottom, content: "Previous Extent" }
+        css:
+          properties:
+            - { name: font-size, value: 2rem }
+            - { name: font-family, value: Verdana }
+        intents:
+          - name: previousExtent
+      - title: ""
+        value: "Next Extent"
+        tooltip: { placement: bottom, content: "Next Extent" }
+        css:
+          properties:
+            - { name: font-size, value: 2rem }
+            - { name: font-family, value: Verdana }
+        intents:
+          - name: nextExtent
+      - title: ""
+        value: "Max Extent"
+        tooltip: { placement: bottom, content: "Zoom to max extent" }
+        css:
+          properties:
+            - { name: font-size, value: 2rem }
+            - { name: font-family, value: Verdana }
+        intents:
+          - name: flyToExtent
+            properties:
+              - { name: extent, value: initial }
+      - title: ""
+        value: "Show Legend"
+        tooltip: { placement: bottom, content: "Show Legend" }
+        css:
+          properties:
+            - { name: font-size, value: 2rem }
+            - { name: font-family, value: FontAwesome }
+        intents:
+          - name: toggleControl
+            properties:
+              - { name: control, value: legend }
+      - title: "Create a Map"
+        value: "Create a Map"
+        tooltip: { placement: bottom, content: "Create a Map" }
+        css:
+          properties:
+            - { name: font-size, value: 2rem }
+            - { name: font-family, value: Verdana }
+      - title: "Create Dashboard"
+        value: "Create Dashboard"
+        tooltip: { placement: bottom, content: "Create Dashboard" }
+        css:
+          properties:
+            - { name: font-size, value: 2rem }
+            - { name: font-family, value: Verdana }

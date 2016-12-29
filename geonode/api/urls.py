@@ -20,16 +20,23 @@
 
 from tastypie.api import Api
 
+from django.conf import settings
+
 from .api import TagResource, TopicCategoryResource, ProfileResource, \
     GroupResource, RegionResource, OwnersResource
 from .resourcebase_api import LayerResource, MapResource, DocumentResource, \
     ResourceBaseResource, FeaturedResourceBaseResource
+
+if getattr(settings, "GEODASH_ENABLED", False) and "geonode.contrib.dashboards" in settings.INSTALLED_APPS:
+    from .resourcebase_api import DashboardResource
 
 api = Api(api_name='api')
 
 api.register(LayerResource())
 api.register(MapResource())
 api.register(DocumentResource())
+if getattr(settings, "GEODASH_ENABLED", False) and "geonode.contrib.dashboards" in settings.INSTALLED_APPS:
+    api.register(DashboardResource())
 api.register(ProfileResource())
 api.register(ResourceBaseResource())
 api.register(TagResource())

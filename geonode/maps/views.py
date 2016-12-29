@@ -30,6 +30,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotAllow
 from django.shortcuts import render_to_response, get_object_or_404
 from django.conf import settings
 from django.template import RequestContext
+from django.template.loader import get_template
 from django.utils.translation import ugettext as _
 try:
     # Django >= 1.7
@@ -142,6 +143,36 @@ def map_detail(request, mapid, snapshot=None, template='maps/map_detail.html'):
 
     if settings.SOCIAL_ORIGINS:
         context_dict["social_links"] = build_social_links(request, map_obj)
+
+    if getattr(settings, "LAYER_PREVIEW_LIBRARY") == "geodash":
+        dashboard_resources = [
+            { "name": "security", "url": reverse("dashboards_api_security", kwargs={"type": "map", "uuid": mapid, "extension": "json"}) },
+            { "loader": "endpoints", "url": reverse("dashboards_api_endpoints", kwargs={"extension": "json"}) },
+            { "loader": "pages", "url": reverse("dashboards_api_pages", kwargs={"extension": "json"}) },
+            { "name": "dashboard_schema", "url": reverse("dashboards_api_schema", kwargs={"name": "config", "extension": "json"})},
+            { "name": "editor_schema", "url": reverse("dashboards_api_schema", kwargs={"name": "editor", "extension": "json"})},
+            { "name": "security_schema", "url": reverse("dashboards_api_schema", kwargs={"name": "security", "extension": "json"})}
+        ];
+
+        ctx_geodash = {
+            "dashboard_url": reverse("dashboards_api_config", kwargs={"type": "map", "uuid": mapid, "extension": "json"}),
+            "state_url": reverse("dashboards_api_state", kwargs={"type": "map", "uuid": mapid, "extension": "json"}),
+            "state_schema_url": reverse("dashboards_api_schema", kwargs={"name": "state", "extension": "json"}),
+            "geodash_main_id": "geodash-main",
+            "include_sidebar_left": False,
+            "include_sidebar_left": False,
+            "modal_welcome": True,
+            "dashboard_resources_json": json.dumps(dashboard_resources),
+            "GEODASH_MAP_PREVIEW_HEIGHT": getattr(settings, "GEODASH_MAP_PREVIEW_HEIGHT")
+        }
+
+        ctx_geodash.update({
+            "server_templates": json.dumps({
+                "main.tpl.html": get_template("dashboards/map_detail/main.tpl.html").render(ctx_geodash)
+            })
+        })
+
+        context_dict.update(ctx_geodash)
 
     return render_to_response(template, RequestContext(request, context_dict))
 

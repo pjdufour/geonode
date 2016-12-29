@@ -2,7 +2,7 @@
 
 {% load geodash_tags %}
 
-{% block title %}{{ map_config.title }}{% endblock %}
+{% block title %}{{ SITE_NAME }}{% endblock %}
 
 {% block head_fonts %}
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
@@ -91,7 +91,7 @@
 
 {% block init %}
 <script type="text/javascript" language="Javascript">
-  $(function(){ geodash.init.dashboard("main", $("#geodash-main"), []); });
+  $(function(){ geodash.init.dashboard("main", $("#geodash-main"), undefined); });
 </script>
 {% endblock %}
 

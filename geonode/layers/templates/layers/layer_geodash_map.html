@@ -1,0 +1,22 @@
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+<link href="{{ STATIC_URL }}dashboards/build/bootstrap/bootstrap.css" rel="stylesheet"/>
+<link href="{{ STATIC_URL }}dashboards/lib/typeahead.js-bootstrap-css/typeaheadjs.css" rel="stylesheet"/>
+<link href="{{ STATIC_URL }}dashboards/lib/c3/{{ GEODASH_STATIC_DEPS.c3.version }}/c3.min.css" rel="stylesheet"/>
+<link href="{{ STATIC_URL }}dashboards/lib/font-awesome/{{ GEODASH_STATIC_DEPS.fontawesome.version }}/css/font-awesome.min.css" rel="stylesheet"/>
+<link href='{{ STATIC_URL }}dashboards/build/css/dashboards.css?v={{ GEODASH_STATIC_VERSION }}' rel='stylesheet' />
+<script src="{{ STATIC_URL }}dashboards/build/js/polyfill.min.js?v={{ GEODASH_STATIC_VERSION }}"></script>
+<script src="{{ STATIC_URL }}dashboards/build/js/dashboards.full.js?v={{ GEODASH_STATIC_VERSION }}"></script>
+<script type="text/javascript" language="Javascript">
+  var now = new Date();
+  var today = new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  var months_short_3 = {{ MONTHS_SHORT3|safe }};
+  var months_long = {{ MONTHS_LONG|safe }};
+  var months_num = {{ MONTHS_NUM|safe }};
+  var daysoftheweek = {{ DAYSOFTHEWEEK|safe }};
+  geodash.mapping_library = "{{ GEODASH_MAPPING_LIBRARY }}";
+  geodash.templates.server = {{ server_templates | safe }};
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.getElementById('geodash-main').setAttribute("style", "height:{{ GEODASH_LAYER_PREVIEW_HEIGHT }}px;");
+    geodash.init.dashboard("main", $("#geodash-main"), undefined);
+  });
+</script>

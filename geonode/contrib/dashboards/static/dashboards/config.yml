@@ -5,96 +5,54 @@ description: "GeoNode GeoDash Contrib App 1.x"
 path:
   geodash: "./src/geodash"
 less:
-  pre:
-    - "./src/geodash/global/dashboards.less"
-  paths:
-    - "./src/geodash/global"
+  pre: ["./src/geodash/global/dashboards.less"]
+  paths: ["./src/geodash/global"]
   outfile: "main.css"
   dest: "./build/css/"
 bootstrap:
-  src: "/home/vagrant/geodash-framework-django.git/geodash/static/geodash/lib/bootstrap/3.3.5/less"
+  src: "./lib/bootstrap/3.3.5/less"
   variables: "./src/less/bootstrap/variables.less"
   dest: "./build/bootstrap"
 plugins:
   # For Production
-  - { branch: master, url: https://github.com/geodashio/geodash-plugin-map-map.git }
-  - { branch: master, url: https://github.com/geodashio/geodash-plugin-editor-welcome.git }
-  - { branch: master, url: https://github.com/geodashio/geodash-plugin-editor-sidebar.git }
-  - { branch: master, url: https://github.com/geodashio/geodash-plugin-main.git }
+  #- { branch: master, url: https://github.com/geodashio/geodash-plugin-map-map.git }
+  #- { branch: master, url: https://github.com/geodashio/geodash-plugin-main.git }
+  #- { branch: master, url: https://github.com/geodashio/geodash-plugin-geonode-dashboards.git }
   # For development, you can point to local copies
-  #- file:///home/vagrant/geodash-plugin-map-map.git
-  #- file:///home/vagrant/geodash-plugin-editor-welcome.git
-  #- file:///home/vagrant/geodash-plugin-editor-sidebar.git
-  #- file:///home/vagrant/geodash-plugin-main.git
-  - dashboards
+  - file:///home/vagrant/geodash-plugin-map-map.git
+  - file:///home/vagrant/geodash-plugin-main.git
+  - file:///home/vagrant/geodash-plugin-geonode-dashboards.git
 dependencies:
   production:
     javascript:
-      - "./src/js/main/*.js"
+      - "./src/main.js"
+      - "./src/config.js"
       - "./build/meta/meta.js"
       - "./build/templates/templates.js"
     templates:
       - "./src/templates/*.html"
     project:
       - "~/geodash-base.git/config.yml"
+      # - - { branch: master, url: https://github.com/geodashio/geodash-base.git }
   test:
     javascript:
       - "./src/js/main/*.js"
       - "./src/js/polyfill/*.js"
-compiler:
-  list: []
+compiler: { list: [] }
 resources:
-  - name: dashboards.less
-    path: ./src/geodash/global/dashboards.less
-  - name: bootstrap.css
-    path: ./build/bootstrap/bootstrap.css
-  - name: polyfill.min.js
-    path: ./build/js/polyfill.min.js
+  - { name: dashboards.less, path: "./src/geodash/global/dashboards.less" }
+  - { name: bootstrap.css, path: "./build/bootstrap/bootstrap.css" }
+  - { name: polyfill.min.js, path: "./build/js/polyfill.min.js" }
 build:
   main.css:
     name: main.css
     type: less
     src:
-      - type: resource
-        project: dashboards
-        name: dashboards.less
-      - type: var
-        name: compile_less  # GeoDash will concat array variables
+      - { type: resource, project: dashboards, name: dashboards.less }
+      - { type: var, name: compile_less  }  # GeoDash will concat array variables
     outfile: dashboards.css
     dest: ./build/css/
     paths: ./src/geodash/global
-  monolith.css:
-    name: monolith.css # more complicated, since need to automaticlly rewrite paths in urls
-    type: css
-    src:
-      - type: resource
-        project: geodash
-        name: jquery-ui.min.css
-      - type: resource
-        project: geodash
-        name: select2.min.css
-      - type: resource
-        project: geodash
-        name: select2-bootstrap.min.css
-      - type: resource
-        project: dashboards
-        name: bootstrap.css
-      - type: resource
-        project: geodash
-        name: typeaheadjs.css
-      - type: resource
-        project: geodash
-        name: c3.min.css
-      - type: resource
-        project: geodash
-        name: ol3.css
-      - type: resource
-        project: geodash
-        name: font-awesome.min.css
-      - type: build
-        name: main.css
-    outfile: dashboards.full.css
-    dest: ./build/css/
   polyfill.js:
     name: polyfill.js
     type: js
@@ -134,11 +92,7 @@ build:
         name: yaml.js
       - type: resource
         project: geodash
-        version: "4.0.1"
-        name: select2.full.js
-      - type: resource
-        project: geodash
-        version: custom
+        version: geodash
         name: typeahead.js
       - type: resource
         project: geodash
@@ -168,8 +122,10 @@ build:
         project: geodash
         version: "1.3.0"
         name: showdown.js
-      - type: build
-        name: monkeypatch.js
+      - type: resource
+        project: geodash
+        version: "0.0.1"
+        name: geodash.js
       - type: build
         name: main.js
     outfile: dashboards.full.js

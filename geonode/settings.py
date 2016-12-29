@@ -629,7 +629,7 @@ DEFAULT_MAP_CENTER = (0, 0)
 # How tightly zoomed should newly created maps be?
 # 0 = entire world;
 # maximum zoom is between 12 and 15 (for Google Maps, coverage varies by area)
-DEFAULT_MAP_ZOOM = 0
+DEFAULT_MAP_ZOOM = 3
 
 ALT_OSM_BASEMAPS = os.environ.get('ALT_OSM_BASEMAPS', False)
 CARTODB_BASEMAPS = os.environ.get('CARTODB_BASEMAPS', False)
@@ -825,6 +825,9 @@ GEODASH_ENABLED = True
 #-----------------------------
 # Mapping Library
 GEODASH_MAPPING_LIBRARY = "ol3"
+GEODASH_OGC_SERVER_PORT = 8000
+GEODASH_LAYER_PREVIEW_HEIGHT = 400
+GEODASH_MAP_PREVIEW_HEIGHT = 400
 #-----------------------------
 # Database
 GEODASH_DB_CONN_STR = "dbname='geodash' user='geodash' host='localhost' password='geodash'"
@@ -907,7 +910,7 @@ CACHES = {
     #     }
 }
 
-LAYER_PREVIEW_LIBRARY = 'geoext'
+LAYER_PREVIEW_LIBRARY = 'geodash'  # can be set to geoext, leaflet, or geodash
 
 SERVICE_UPDATE_INTERVAL = 0
 

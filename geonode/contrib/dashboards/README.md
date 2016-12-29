@@ -24,6 +24,15 @@ Install gulp to global
 sudo npm install gulp -g
 ```
 
+Then install the local npm modules and build the static files.
+
+```
+cd geonode/contrib/dashboards/static/dashboards
+npm install
+gulp
+gulp bootstrap:compile
+```
+
 ## Settings
 
 ### Activation

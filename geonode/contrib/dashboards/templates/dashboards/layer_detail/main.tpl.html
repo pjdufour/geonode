@@ -1,0 +1,17 @@
+<div class="row geodash-row geodash-main geodash-controller" style="position:relative; height:{{ LAYER_PREVIEW_HEIGHT }}px;">
+  <div
+    id="geodash-map"
+    class="row geodash-row geodash-map geodash-controller"
+    style="position:relative; height:{{ LAYER_PREVIEW_HEIGHT }}px;"
+    dashboards-map>
+    <div data-geodash-controllers="GeoDashControllerOverlays" geodash-map-overlays></div>
+    <div data-geodash-controllers="GeoDashControllerNavbars" geodash-map-navbars></div>
+    <div data-geodash-controllers="GeoDashControllerLegend" geodash-map-legend></div>
+    <div id="map" style="positiion:relative;width:100%;height:100%;" data-geodash-controllers="GeoDashControllerMapMap" geodash-map-map></div>
+    <div id="geodash-popups" style="display:none;">
+    <div id="popup"></div>
+    </div>
+  </div>
+  <div id="geodash-modals" class="geodash-modals">
+  </div>
+</div>

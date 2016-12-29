@@ -1,0 +1,34 @@
+---
+title: Browse
+welcome:
+  title: "{{ SITE_NAME }} - Dashboards"
+  intro: "**Dashboards** is a GeoNode contrib app based on [GeoDash](http://geodash.io)."
+  about: "**Dashboards** is a GeoNode contrib app based on [GeoDash](http://geodash.io)."
+view:
+  baselayer: osm
+  featurelayers: []
+  latitude: {{ latitude }}
+  longitude:  {{ longitude }}
+  maxZoom: 18
+  minZoom: 0
+  zoom: {{ zoom }}
+  controls: []
+controls:
+  attribution: false
+  legend: false
+  zoom: false
+renderlayers:
+  - osm
+baselayers:
+  - id: osm
+    title: OpenStreetMap
+    description: OpenStreetMap Basemap, Standard Style
+    source:
+      type: tiles
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      name: OpenStreetMap
+    tile: { url: "https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png" }
+featurelayers: []
+overlays: []
+legend: {}
+navbars: []

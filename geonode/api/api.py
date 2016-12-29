@@ -55,6 +55,11 @@ FILTER_TYPES = {
 }
 
 
+if getattr(settings, "GEODASH_ENABLED", False) and "geonode.contrib.dashboards" in settings.INSTALLED_APPS:
+    from geonode.contrib.dashboards.models import Dashboard
+    FILTER_TYPES['dashboard'] = Dashboard
+
+
 class CountJSONSerializer(Serializer):
     """Custom serializer to post process the api and add counts"""
 
@@ -213,6 +218,7 @@ class ProfileResource(TypeFilteredResource):
     layers_count = fields.IntegerField(default=0)
     maps_count = fields.IntegerField(default=0)
     documents_count = fields.IntegerField(default=0)
+    dashboards_count = fields.IntegerField(default=0)
     current_user = fields.BooleanField(default=False)
     activity_stream_url = fields.CharField(null=True)
 
@@ -263,6 +269,15 @@ class ProfileResource(TypeFilteredResource):
         obj_with_perms = get_objects_for_user(bundle.request.user,
                                               'base.view_resourcebase').instance_of(Document)
         return bundle.obj.resourcebase_set.filter(id__in=obj_with_perms.values('id')).distinct().count()
+
+    def dehydrate_dashboards_count(self, bundle):
+        if getattr(settings, "GEODASH_ENABLED", False) and "geonode.contrib.dashboards" in settings.INSTALLED_APPS:
+            obj_with_perms = get_objects_for_user(
+                bundle.request.user,
+                'base.view_resourcebase').instance_of(Dashboard)
+            return bundle.obj.resourcebase_set.filter(id__in=obj_with_perms.values('id')).distinct().count()
+        else:
+            return 0
 
     def dehydrate_avatar_100(self, bundle):
         return avatar_url(bundle.obj, 240)

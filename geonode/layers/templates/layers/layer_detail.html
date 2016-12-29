@@ -24,6 +24,8 @@
     {% include "layers/layer_geoext_map.html" %}
   {% elif preview == 'OL3' %}
     {% include "layers/layer_ol3_map.html" %}
+  {% elif preview == 'geodash' %}
+    {% include "layers/layer_geodash_map.html" %}
   {% else %}
     {% include "layers/layer_leaflet_map.html" %}
   {% endif %}
@@ -42,7 +44,21 @@
   <div class="col-md-8">
 
     <div id="embedded_map" class="mrg-btm">
+      {% if preview == 'geodash' %}
+      <div
+        id="geodash-main"
+        data-geodash-dashboard-name="main"
+        data-geodash-controllers="GeoDashControllerMain"
+        {% if dashboard_url %}data-geodash-dashboard-config-url="{{ dashboard_url }}"{% endif %}
+        {% if state_url %}data-geodash-dashboard-initial-state-url="{{ state_url }}"{% endif %}
+        {% if state_schema_url %}data-geodash-dashboard-state-schema-url="{{ state_schema_url }}"{% endif %}
+        {% if dashboard_resources_json %}data-geodash-dashboard-resources="{{ dashboard_resources_json }}"{% endif %}
+        class="geodash-dashboard"
+        geodash-main>
+      </div>
+      {% else %}
       <div id="preview_map"></div>
+      {% endif %}
     </div>
 
     <div class="layer-actions">

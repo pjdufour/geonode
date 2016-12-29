@@ -1,6 +1,6 @@
 {% extends "dashboards/map.html" %}
 
-{% block title %}GeoDash - Explore{% endblock %}
+{% block title %}Explore Dashboards - {{ SITE_NAME }}{% endblock %}
 
 {% block extra_head %}{{ block.super }}{% endblock %}
 
@@ -10,9 +10,7 @@
 <script type="text/javascript" language="Javascript">
     geodash.initial_data =
     {
-      "data": {
-        "dashboards_typeahead": {{ GEODASH_DASHBOARDS_TYPEAHEAD|safe }}
-      }
+      "data": {}
     };
 </script>
 {% endblock %}

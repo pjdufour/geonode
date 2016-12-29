@@ -103,7 +103,7 @@ var configs = geodash.flatten.configs(geodash.load.config("./config.yml", cwd), 
 var geodash_meta_projects = [];
 var geodash_meta_plugins = [];
 var geodash_meta_controllers = [];
-var geodash_meta_modals = [];
+//var geodash_meta_modals = [];
 
 var compile_endpoints = [];
 var compile_schemas = [];
@@ -115,6 +115,7 @@ var compile_directives = [];
 var compile_controllers = [];
 var compile_js = [];
 var compile_less = [];
+var compile_modals = [];
 var test_js = [];
 var compilelist = [];
 
@@ -133,7 +134,7 @@ for(var i = 0; i < configs.length; i++)
 
   geodash.log.debug(['########', 'Project '+i+': '+config.name], argv);
 
-  var path_cache = path.join(config.path.base, config.path.geodash, ".cache");
+  var path_cache = path.join(config.path.base, ".cache");
   var path_plugins = path.join(config.path.base, config.path.geodash, "plugins");
 
   mkdirp.sync(geodash.expand.home(geodash.resolve.path(path.join(path_cache, "plugins"), cwd)));
@@ -147,6 +148,7 @@ for(var i = 0; i < configs.length; i++)
   var project_directives = []; // Exported to the compile process
   var project_controllers = []; // Exported to the compile process
   var project_less = []; // Exported to the compile process
+  var project_modals = []; // Exported to the compile process
 
   for(var j = 0; j < config["plugins"].length; j++)
   {
@@ -230,19 +232,7 @@ for(var i = 0; i < configs.length; i++)
         }
       }
 
-      if(geodash_plugin["modals"] != undefined)
-      {
-        for(var k = 0; k < geodash_plugin.modals.length; k++)
-        {
-          var m = geodash_plugin.modals[k];
-          if(typeof m != "string")
-          {
-            geodash_meta_modals.push({'name': m.name, 'config': m.config, 'ui': m.ui});
-          }
-        }
-      }
-
-      var files = geodash.collect.files_all(pluginPath, geodash_plugin,[
+      var files = geodash.collect.files_all(pluginPath, geodash_plugin, [
         "enumerations",
         "endpoints",
         "filters",
@@ -262,6 +252,26 @@ for(var i = 0; i < configs.length; i++)
       project_directives = project_directives.concat(files["directives"]);
       project_controllers = project_controllers.concat(files["controllers"]);
       project_less = project_less.concat(files["less"]);
+
+      if(geodash_plugin["modals"] != undefined)
+      {
+        for(var k = 0; k < geodash_plugin.modals.length; k++)
+        {
+          var m = geodash_plugin.modals[k];
+          if(typeof m == "string")
+          {
+            project_modals.push(geodash.load.file(
+              m,
+              path.join(path.dirname(pluginPath), "modals")
+            ));
+          }
+          else
+          {
+            project_modals.push(m);
+          }
+        }
+      }
+
     }
   }
 
@@ -287,6 +297,7 @@ for(var i = 0; i < configs.length; i++)
   compile_directives = compile_directives.concat(project_directives);
   compile_controllers = compile_controllers.concat(project_controllers);
   compile_less = compile_less.concat(project_less);
+  compile_modals = compile_modals.concat(project_modals);
 
   if("dependencies" in config)
   {
@@ -324,6 +335,7 @@ test_js = test_js.concat(
 
 variables['compile_js'] = compile_js;
 variables['compile_less'] = compile_less;
+variables['compile_modals'] = compile_modals;
 
 compilelist = compilelist.concat(rootConfig["compiler"]["list"]);
 compilelist = compilelist.map(function(obj){
@@ -393,7 +405,7 @@ gulp.task('geodash:meta', ['clean'], function(cb){
   lines.push("geodash.meta.projects = "+JSON.stringify(geodash_meta_projects)+";");
   lines.push("geodash.meta.plugins = "+JSON.stringify(geodash_meta_plugins)+";");
   lines.push("geodash.meta.controllers = "+JSON.stringify(geodash_meta_controllers)+";");
-  lines.push("geodash.meta.modals = "+JSON.stringify(geodash_meta_modals)+";");
+  lines.push("geodash.meta.modals = "+JSON.stringify(compile_modals)+";");
   var contents = lines.join("\n");
   geodash.log.debug(['Contents of GeoDash meta.js', contents], argv);
   if (!fs.existsSync('./build')){ fs.mkdirSync('./build'); }
