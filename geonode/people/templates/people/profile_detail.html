@@ -114,12 +114,12 @@
     </tbody>
   </table>
 </div>
-  
+
 <div class="col-xs-12 col-md-3">
-  <ul class="list-group">
-      <li class="list-group-item"><a href="{% url "message_create" profile.pk %}"><i class="fa fa-paper-plane-o"></i> {% trans "Message User" %}</a></li>
-    </ul>
   {% if user == profile %}
+    <ul class="list-group">
+      <li class="list-group-item"><a href="{% url "messages_inbox" %}"><i class="fa fa-paper-plane-o"></i> {% trans "Inbox" %}</a></li>
+    </ul>
     <ul class="list-group">
       <li class="list-group-item"><a href="{% url "profile_edit" user.username %}"><i class="fa fa-edit"></i> {% trans "Edit profile" %}</a></li>
       <li class="list-group-item"><a href="{% url "account_password" %}"><i class="fa fa-lock"></i> {% trans "Change password" %}</a></li>
@@ -151,6 +151,9 @@
       {% include "relationships/_manage_connections.html" %}
     {% endif_has_tag %}
   {% else %}
+    <ul class="list-group">
+      <li class="list-group-item"><a href="{% url "message_create" profile.pk %}"><i class="fa fa-paper-plane-o"></i> {% trans "Message User" %}</a></li>
+    </ul>
     {% if user.is_superuser %}
     <ul class="list-group">
       <li class="list-group-item"><a href="{% url "profile_edit" profile.username %}"><i class="fa fa-edit"></i> {% trans "Edit profile" %}</a></li>

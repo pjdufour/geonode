@@ -5,7 +5,7 @@
     .controller('CartList', function($scope, cart){
       $scope.cart = cart;
       $scope.layers_params = '';
-  
+
       $scope.newMap = function(){
         var items = cart.getCart().items;
         var params = '';
@@ -35,8 +35,8 @@
            },
            success: function(data) {
              var not_changed = $.parseJSON(data).not_changed;
-             if (not_changed.length > 0){ 
-               message.find('.message').html('Permissions correctly registered, although the following resources were'+ 
+             if (not_changed.length > 0){
+               message.find('.message').html('Permissions correctly registered, although the following resources were'+
                    ' skipped because you don\'t have the rights to edit their permissions:');
                message.find('.extra_content').html(not_changed.join('</br>'));
                message.addClass('alert-warning').removeClass('alert-success alert-danger hidden');
@@ -63,7 +63,7 @@
     }])
 
     .service('cart', function(){
-      
+
       this.init = function(){
         this.$cart = {
           items: []
@@ -112,9 +112,9 @@
 
       this.getFaClass = function(id){
         if(this.getItemById(id) === null){
-          return 'fa-cart-plus';
+          return 'fa-square-o';
         }else{
-          return 'fa-remove'
+          return 'fa-check-square-o'
         }
       }
     })
